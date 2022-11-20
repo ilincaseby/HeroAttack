@@ -26,7 +26,7 @@ public class PlayersDecks {
             for (int j = 0; j < cardInput.size(); ++j) {
                 CardInput card = cardInput.get(j);
                 if (card.getName().equals("Winterfell")) {
-                    Winterfall env = new Winterfall(card.getMana(), card.getDescription(), card.getColors(), card.getName());
+                    Winterfell env = new Winterfell(card.getMana(), card.getDescription(), card.getColors(), card.getName());
                     newCards.add(env);
                     continue;
                 }
@@ -63,7 +63,7 @@ public class PlayersDecks {
                 Minion mini = new Minion(card.getMana(), card.getHealth(), card.getAttackDamage(), card.getDescription(), card.getName(), card.getColors());
                 newCards.add(mini);
             }
-            p.Decks.add(newCards);
+            p.decks.add(newCards);
         }
     }
 }

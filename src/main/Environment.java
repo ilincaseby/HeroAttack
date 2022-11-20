@@ -13,7 +13,8 @@ public class Environment extends Cards {
         this.description = description;
         this.colors = colors;
         this.name = name;
-        super.isMinion = false;
+        //super.isMinion = false;
+        super.isEnv = true;
     }
 }
 
@@ -29,8 +30,8 @@ class FireStorm extends Environment {
     }
 }
 
-class Winterfall extends Environment {
-    public Winterfall(int mana, String description, List<String> colors, String name) {
+class Winterfell extends Environment {
+    public Winterfell(int mana, String description, List<String> colors, String name) {
         super(mana, description, colors, name);
     }
     public void ability(Cards[][] arr, int row) {
@@ -46,7 +47,7 @@ class HeartHound extends Environment {
     public HeartHound(int mana, String description, List<String> colors, String name) {
         super(mana, description, colors, name);
     }
-    public void ability(Cards[][] arr, int row) {
+    public int ability(Cards[][] arr, int row) {
         int indexHighestHealth = -1;
         int maxHealth = 0;
         for (int j = 0; j < 5; ++j) {
@@ -63,8 +64,9 @@ class HeartHound extends Environment {
         if (row == 2 || row == 3)
             mirrorIndex = row - 3;
         if (arr[mirrorIndex][indexHighestHealth].isNull == false)
-            return;
+            return -1;
         arr[mirrorIndex][indexHighestHealth] = arr[row][indexHighestHealth];
         arr[row][indexHighestHealth] = new nullCard();
+        return 1;
     }
 }

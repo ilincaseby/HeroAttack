@@ -6,6 +6,6 @@ import java.util.List;
 public class Decks {
     public int nrCardsInDeck;
     public int nrDecks;
-    public List<List<Cards>> Decks = new ArrayList<>();
+    public List<List<Cards>> decks = new ArrayList<>();
 
 }

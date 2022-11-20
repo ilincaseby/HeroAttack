@@ -8,11 +8,13 @@ public class Hero {
     List<String> colors;
     int health = 30;
     private boolean validAttack = true;
+    String name;
 
-    public Hero(int mana, String description, List<String> colors) {
+    public Hero(int mana, String description, List<String> colors, String name) {
         this.mana = mana;
         this.description = description;
         this.colors = colors;
+        this.name = new String(name);
     }
 
     public boolean isValidAttack() {
@@ -30,7 +32,7 @@ public class Hero {
 
 class LordRoyce extends Hero {
     public LordRoyce(int mana, String description, List<String> colors) {
-        super(mana, description, colors);
+        super(mana, description, colors, "Lord Royce");
     }
     public void subZero(Cards[][] arr, int row) {
         int indexHighestAttackLevel = -1;
@@ -51,7 +53,7 @@ class LordRoyce extends Hero {
 
 class EmpressThorina extends Hero {
     public EmpressThorina(int mana, String description, List<String> colors) {
-        super(mana, description, colors);
+        super(mana, description, colors, "Empress Thorina");
     }
     public void lowBlow(Cards[][] arr, int row) {
         int indexHighestHealth = -1;
@@ -72,7 +74,7 @@ class EmpressThorina extends Hero {
 
 class KingMudFace extends Hero {
     public KingMudFace(int mana, String description, List<String> colors) {
-        super(mana, description, colors);
+        super(mana, description, colors, "King Mudface");
     }
     public void earthBorn(Cards[][] arr, int row) {
         for (int j = 0; j < 5; ++j) {
@@ -85,7 +87,7 @@ class KingMudFace extends Hero {
 
 class GeneralKocioraw extends Hero {
     public GeneralKocioraw(int mana, String description, List<String> colors) {
-        super(mana, description, colors);
+        super(mana, description, colors, "General Kocioraw");
     }
     public void bloodThrist(Cards[][] arr, int row) {
         for (int j = 0; j < 5; ++j) {

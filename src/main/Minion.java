@@ -13,6 +13,7 @@ public class Minion extends Cards {
     public boolean isTank = false;
     private boolean validAttack = true;
     private boolean isFrozen = false;
+    public boolean isValidTurn = true;
 
     public void freeze() {
         isFrozen = true;
@@ -45,7 +46,7 @@ public class Minion extends Cards {
         this.description = description;
         this.name = name;
         this.colors = new ArrayList<String>(colors);
-        if (name.equals("Goliath") == true || name.equals("Warden"))
+        if (name.equals("Goliath") || name.equals("Warden"))
             isTank = true;
         super.isMinion = true;
     }
@@ -63,6 +64,7 @@ class Miraj extends Minion implements Actions {
         int aux = unluckyGuy.health;
         unluckyGuy.health = this.health;
         this.health = aux;
+        this.isValidTurn = false;
     }
 }
 
@@ -72,6 +74,7 @@ class TheRipper extends Minion implements Actions {
     }
     public void action(Minion unluckyGuy) {
         unluckyGuy.attackDamage -= 2;
+        this.isValidTurn = false;
     }
 }
 
@@ -85,6 +88,7 @@ class TheCursedOne extends Minion implements Actions {
         int aux = unluckyGuy.health;
         unluckyGuy.health = unluckyGuy.attackDamage;
         unluckyGuy.attackDamage = aux;
+        this.isValidTurn = false;
     }
 }
 
@@ -96,5 +100,6 @@ class Disciple extends Minion implements Actions {
     @Override
     public void action(Minion luckyGuy) {
         luckyGuy.health += 2;
+        this.isValidTurn = false;
     }
 }

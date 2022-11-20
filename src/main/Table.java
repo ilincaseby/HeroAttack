@@ -11,7 +11,7 @@ public class Table {
     private Table() {
         arr = new Cards[4][5];
     }
-    public Table getInstance() {
+    public static Table getInstance() {
         if (instance == null)
             instance = new Table();
         return instance;
