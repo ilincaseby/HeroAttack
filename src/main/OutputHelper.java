@@ -314,6 +314,57 @@ public class OutputHelper {
     }
 
     public static ObjectNode getEnvironmentCardsInHand(Player player, int playerIdx) {
-
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode node = mapper.createObjectNode();
+        node.put("command", "getEnvironmentCardsInHand");
+        node.put("playerIdx", playerIdx);
+        ArrayNode arrayNode = mapper.createArrayNode();
+        for (int i = 0; i < player.inPlayDeck.size(); ++i) {
+            if (player.inPlayDeck.get(i).isEnv) {
+                Environment card = ((Environment) player.inPlayDeck.get(i));
+                ObjectNode aux = mapper.createObjectNode();
+                aux.put("mana", card.mana);
+                aux.put("description", card.description);
+                ArrayNode arr = mapper.createArrayNode();
+                for (int k = 0; k < card.colors.size(); ++k) {
+                    arr.add(card.colors.get(k));
+                }
+                aux.putArray("colors").add(arr);
+                aux.put("name", card.name);
+                arrayNode.add(aux);
+            }
+        }
+        node.putArray("output").add(arrayNode);
+        return node;
+    }
+    public static ObjectNode getFrozenTable() {
+        Table table = Table.getInstance();
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode node = mapper.createObjectNode();
+        node.put("command", "getFrozenCardsOnTable");
+        ArrayNode arrayNode = mapper.createArrayNode();
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 5; ++j) {
+                if (!table.arr[i][j].isNull) {
+                    Minion minCard = ((Minion) table.arr[i][j]);
+                    if (minCard.isFrozen()) {
+                        ObjectNode nodeCard = mapper.createObjectNode();
+                        nodeCard.put("mana", minCard.mana);
+                        nodeCard.put("attackDamage", minCard.attackDamage);
+                        nodeCard.put("health", minCard.health);
+                        nodeCard.put("description", minCard.description);
+                        ArrayNode arr = mapper.createArrayNode();
+                        for (int k = 0; k < minCard.colors.size(); ++i) {
+                            arr.add(minCard.colors.get(i));
+                        }
+                        nodeCard.putArray("colors").add(arr);
+                        nodeCard.put("name", minCard.name);
+                        arrayNode.add(nodeCard);
+                    }
+                }
+            }
+        }
+        node.putArray("output").add(arrayNode);
+        return node;
     }
 }

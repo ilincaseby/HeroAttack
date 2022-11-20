@@ -595,6 +595,9 @@ public class TakeAction {
                         output.add(OutputHelper.getEnvironmentCardsInHand(playerTwo, 2));
                     }
                     break;
+                case "getFrozenCardsOnTable":
+                    output.add(OutputHelper.getFrozenTable());
+                    break;
             }
         }
     }
