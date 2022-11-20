@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Random;
 
 public class TakeAction {
-    public void start(PlayersDecks playerDeck, GameInput game, ArrayNode output) {
+    public void start(PlayersDecks playerDeck, GameInput game, ArrayNode output, int noGamesPlayed) {
         Table table = Table.getInstance();
         table.clearTable();
         Player playerOne = new Player();
@@ -389,6 +389,7 @@ public class TakeAction {
                         playerTwo.hero.health -= ((Minion) table.arr[badForYou.getX()][badForYou.getY()]).attackDamage;
                         if (playerTwo.hero.health <= 0) {
                             output.add(OutputHelper.announceVictory(1));
+                            playerOne.wins++;
                             break;
                         }
                     }
@@ -405,6 +406,7 @@ public class TakeAction {
                         playerOne.hero.health -= ((Minion) table.arr[badForYou.getX()][badForYou.getY()]).attackDamage;
                         if (playerOne.hero.health <= 0) {
                             output.add(OutputHelper.announceVictory(2));
+                            playerTwo.wins++;
                             break;
                         }
                     }
@@ -597,6 +599,18 @@ public class TakeAction {
                     break;
                 case "getFrozenCardsOnTable":
                     output.add(OutputHelper.getFrozenTable());
+                    break;
+
+                case "getTotalGamesPlayed":
+                    output.add(OutputHelper.getTotalGamesPlayed(noGamesPlayed));
+                    break;
+
+                case "getPlayerOneWins":
+                    output.add(OutputHelper.AnnounceNoVictories(1, playerOne.wins));
+                    break;
+
+                case "getPlayerTwoWins":
+                    output.add(OutputHelper.AnnounceNoVictories(2, playerTwo.wins));
                     break;
             }
         }

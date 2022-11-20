@@ -13,6 +13,7 @@ public class Player {
     public int whichHero = 0;
     public List<Cards> inPlayDeck;
     public List<Cards> inHand = new ArrayList<>();
+    int wins = 0;
 
     public void setInPlayDeck(List<Cards> playingDeck) {
         inPlayDeck = playingDeck;

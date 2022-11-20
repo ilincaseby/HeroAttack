@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import checker.CheckerConstants;
+import fileio.DecksInput;
 import fileio.Input;
 
 import java.io.File;
@@ -70,6 +71,15 @@ public final class Main {
         ArrayNode output = objectMapper.createArrayNode();
 
         //TODO add here the entry point to your implementation
+        DecksInput playerOneInputDecks = inputData.getPlayerOneDecks();
+        DecksInput playerTwoInputDecks = inputData.getPlayerTwoDecks();
+        PlayersDecks decksOfPlayers = new PlayersDecks();
+        decksOfPlayers.putThemRightBaby(playerOneInputDecks, playerTwoInputDecks);
+        /* End of implementation of the game */
+        TakeAction actions = new TakeAction();
+        for (int i = 0; i < inputData.getGames().size(); ++i) {
+            actions.start(decksOfPlayers, inputData.getGames().get(i), output, i + 1);
+        }
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
         objectWriter.writeValue(new File(filePath2), output);

@@ -367,4 +367,24 @@ public class OutputHelper {
         node.putArray("output").add(arrayNode);
         return node;
     }
+
+    public static ObjectNode getTotalGamesPlayed(int gamesCounter) {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode node = mapper.createObjectNode();
+        node.put("command", "getTotalGamesPlayed");
+        node.put("output", gamesCounter);
+        return node;
+    }
+
+    public static ObjectNode AnnounceNoVictories(int whichCase, int wins) {
+        ObjectMapper mapper = new ObjectMapper();
+        ObjectNode node = mapper.createObjectNode();
+        if (whichCase == 1) {
+            node.put("command", "getPlayerOneWins");
+        } else {
+            node.put("command", "getPlayerTwoWins");
+        }
+        node.put("output", wins);
+        return node;
+    }
 }
