@@ -59,17 +59,18 @@ public class TakeAction {
                     playerTwo.mana += 10;
                 }
                 round++;
+
             }
 
-            switch (command)
-            {
+            switch (command) {
                 case "endPlayerTurn":
-
                     roundDone++;
-                    if (!playerOne.inPlayDeck.isEmpty())
-                        playerOne.inHand.add(playerOne.inPlayDeck.remove(0));
-                    if (!playerTwo.inPlayDeck.isEmpty())
+                    if (roundDone == 2){
+                        if (!playerOne.inPlayDeck.isEmpty())
+                            playerOne.inHand.add(playerOne.inPlayDeck.remove(0));
+                        if (!playerTwo.inPlayDeck.isEmpty())
                         playerTwo.inHand.add(playerTwo.inPlayDeck.remove(0));
+                    }
                     boolean check = playerOne.turn;
                     /* It s done for the first player */
                     if (check == true) {
@@ -108,23 +109,26 @@ public class TakeAction {
                         boolean foundASpace = false;
                         for (int k = 0; k < 5; ++k) {
                             if (table.arr[Table.firstPlayerFrontRow][k].isNull) {
-
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("The Ripper")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerFrontRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("Miraj")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerFrontRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("Goliath")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerFrontRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("Warden")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerFrontRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
@@ -138,21 +142,25 @@ public class TakeAction {
                             if (table.arr[Table.firstPlayerBackRow][k].isNull) {
                                 //Cards cardTest = playerOne.inPlayDeck.remove(handIdx);
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("Sentinel")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerBackRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("Berserker")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerBackRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("The Cursed One")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerBackRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerOne.inHand.get(handIdx)).name.equals("Disciple")) {
+                                    playerOne.mana -= ((Minion) playerOne.inHand.get(handIdx)).mana;
                                     table.arr[Table.firstPlayerBackRow][k] = playerOne.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
@@ -179,21 +187,25 @@ public class TakeAction {
                         for (int k = 0; k < 5; ++k) {
                             if (table.arr[Table.secondPlayerFrontRow][k].isNull) {
                                 if (((Minion) playerTwo.inHand.get(handIdx)).name.equals("The Ripper")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerFrontRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerTwo.inHand.get(handIdx)).name.equals("Miraj")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerFrontRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerTwo.inHand.get(handIdx)).name.equals("Goliath")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerFrontRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion) playerTwo.inHand.get(handIdx)).name.equals("Warden")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerFrontRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
@@ -205,21 +217,25 @@ public class TakeAction {
                         for (int k = 0; k < 5; ++k) {
                             if (table.arr[Table.secondPlayerBackRow][k].isNull) {
                                 if (((Minion)  playerTwo.inHand.get(handIdx)).name.equals("Sentinel")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerBackRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion)  playerTwo.inHand.get(handIdx)).name.equals("Berserker")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerBackRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion)  playerTwo.inHand.get(handIdx)).name.equals("The Cursed One")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerBackRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
                                 }
                                 if (((Minion)  playerTwo.inHand.get(handIdx)).name.equals("Disciple")) {
+                                    playerTwo.mana -= ((Minion) playerTwo.inHand.get(handIdx)).mana;
                                     table.arr[Table.secondPlayerBackRow][k] = playerTwo.inHand.remove(handIdx);
                                     foundASpace = true;
                                     break;
@@ -510,6 +526,8 @@ public class TakeAction {
                         if (playerOne.whichHero == 4) {
                             ((LordRoyce) playerOne.hero).subZero(table.arr, affectedRow);
                         }
+                        playerOne.hero.hasAttacked();
+                        playerOne.mana -= playerOne.hero.mana;
                     }
                     if (playerTwo.turn) {
                         if (playerTwo.mana < playerTwo.hero.mana) {
@@ -544,6 +562,8 @@ public class TakeAction {
                         if (playerTwo.whichHero == 4) {
                             ((LordRoyce) playerTwo.hero).subZero(table.arr, affectedRow);
                         }
+                        playerTwo.hero.hasAttacked();
+                        playerTwo.mana -= playerTwo.hero.mana;
                     }
                     break;
 
@@ -562,6 +582,7 @@ public class TakeAction {
                         }
                         if (affectedR != Table.secondPlayerBackRow && affectedR != Table.secondPlayerFrontRow) {
                             output.add(OutputHelper.errorEnvironment(3, handIndex,affectedR));
+                            break;
                         }
                         if (envCard.name.equals("Heart Hound")) {
                             int done = ((HeartHound) envCard).ability(table.arr, affectedR);
@@ -574,6 +595,7 @@ public class TakeAction {
                             ((Winterfell) envCard).ability(table.arr, affectedR);
                         if (envCard.name.equals("Firestorm"))
                             ((FireStorm) envCard).ability(table.arr, affectedR);
+                        playerOne.mana -= envCard.mana;
                         playerOne.inHand.remove(handIndex);
                     }
                     if (playerTwo.turn) {
@@ -602,6 +624,7 @@ public class TakeAction {
                             ((Winterfell) envCard).ability(table.arr, affectedR);
                         if (envCard.name.equals("Firestorm"))
                             ((FireStorm) envCard).ability(table.arr, affectedR);
+                        playerTwo.mana -= envCard.mana;
                         playerTwo.inHand.remove(handIndex);
                         //playerOne
                     }
