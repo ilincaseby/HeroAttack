@@ -708,7 +708,7 @@ public class TakeAction {
                     break;
 
                 case "getPlayerTwoWins":
-                    output.add(OutputHelper.AnnounceNoVictories(2, oneWins.getX()));
+                    output.add(OutputHelper.AnnounceNoVictories(2, twoWins.getX()));
                     break;
             }
         }
