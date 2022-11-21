@@ -78,6 +78,7 @@ public final class Main {
         /* End of implementation of the game */
         TakeAction actions = new TakeAction();
         for (int i = 0; i < inputData.getGames().size(); ++i) {
+            //System.out.println(i + " " + inputData.getGames().size());
             actions.start(decksOfPlayers, inputData.getGames().get(i), output, i + 1);
         }
 

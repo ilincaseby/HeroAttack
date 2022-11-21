@@ -199,7 +199,7 @@ public class OutputHelper {
                 for (int k = 0; k < minCard.colors.size(); ++k) {
                     arr.add(minCard.colors.get(k));
                 }
-                nodeCards.putArray("colors").add(arr);
+                nodeCards.set("colors", arr);
                 nodeCards.put("name", minCard.name);
             }
             if (player.inPlayDeck.get(i).isEnv) {
@@ -210,12 +210,12 @@ public class OutputHelper {
                 for (int k = 0; k < envCard.colors.size(); ++k) {
                     arr.add(envCard.colors.get(k));
                 }
-                nodeCards.putArray("colors").add(arr);
+                nodeCards.set("colors", arr);
                 nodeCards.put("name", envCard.name);
             }
             arrayNode.add(nodeCards);
         }
-        node.putArray("output").add(arrayNode);
+        node.set("output", arrayNode);
         return node;
     }
 
@@ -227,6 +227,9 @@ public class OutputHelper {
         ArrayNode arrayNode = mapper.createArrayNode();
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 5; ++j) {
+//                if (table.arr[i][j].isEnv) {
+//                    System.out.println(i + " " + j + " " + ((Environment) table.arr[i][j]).isEnv);
+//                }
                 if (!table.arr[i][j].isNull) {
                     ObjectNode nodeCard = mapper.createObjectNode();
                     Minion minCard = ((Minion) table.arr[i][j]);
@@ -235,8 +238,8 @@ public class OutputHelper {
                     nodeCard.put("health", minCard.health);
                     nodeCard.put("description", minCard.description);
                     ArrayNode arr = mapper.createArrayNode();
-                    for (int k = 0; k < minCard.colors.size(); ++i) {
-                        arr.add(minCard.colors.get(i));
+                    for (int k = 0; k < minCard.colors.size(); ++k) {
+                        arr.add(minCard.colors.get(k));
                     }
                     nodeCard.putArray("colors").add(arr);
                     nodeCard.put("name", minCard.name);
@@ -268,7 +271,7 @@ public class OutputHelper {
         for (int i = 0; i < player.hero.colors.size(); ++i) {
             arrayNode.add(player.hero.colors.get(i));
         }
-        auxNode.putArray("colors").add(arrayNode);
+        auxNode.set("colors", arrayNode);
         auxNode.put("name", player.hero.name);
         auxNode.put("health", player.hero.health);
         node.set("output", auxNode);
