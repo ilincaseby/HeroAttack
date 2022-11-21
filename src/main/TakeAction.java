@@ -12,11 +12,10 @@ import java.util.List;
 import java.util.Random;
 
 public class TakeAction {
-    public void start(PlayersDecks playerDeck, GameInput game, ArrayNode output, int noGamesPlayed) {
+
+    public void start(PlayersDecks playerDeck, GameInput game, ArrayNode output, int noGamesPlayed, Player playerOne, Player playerTwo, MyInteger oneWins, MyInteger twoWins) {
         Table table = Table.getInstance();
         table.clearTable();
-        Player playerOne = new Player();
-        Player playerTwo = new Player();
         int shuffleSeed = game.getStartGame().getShuffleSeed();
         int startingPlayer = game.getStartGame().getStartingPlayer();
         int indexOne = game.getStartGame().getPlayerOneDeckIdx();
@@ -77,12 +76,14 @@ public class TakeAction {
                         playerOne.turn = false;
                         playerTwo.turn = true;
                         unfroze(table, Table.firstPlayerBackRow, Table.firstPlayerFrontRow);
+                        playerOne.hero.resetAttack();
                     }
                     /* It s done the turn for second player */
                     if (check == false) {
                         playerOne.turn = true;
                         playerTwo.turn = false;
                         unfroze(table, Table.secondPlayerBackRow, Table.secondPlayerFrontRow);
+                        playerTwo.hero.resetAttack();
                     }
                     break;
 
@@ -355,22 +356,23 @@ public class TakeAction {
                                 output.add(OutputHelper.usesAbility(4, Cattacker, Cattacked));
                                 break;
                             }
-                        }
-                        boolean tankOneLeast = false;
-                        boolean isAttackedTank = false;
-                        for (int k = 0; k < 5; ++k) {
-                            if (!table.arr[Table.secondPlayerFrontRow][k].isNull){
-                                if (((Minion) table.arr[Table.secondPlayerFrontRow][k]).isTank) {
-                                    tankOneLeast = true;
-                                    if (Cattacked.getX() == Table.secondPlayerFrontRow && Cattacked.getY() == k)
-                                        isAttackedTank = true;
+                            boolean tankOneLeast = false;
+                            boolean isAttackedTank = false;
+                            for (int k = 0; k < 5; ++k) {
+                                if (!table.arr[Table.secondPlayerFrontRow][k].isNull){
+                                    if (((Minion) table.arr[Table.secondPlayerFrontRow][k]).isTank) {
+                                        tankOneLeast = true;
+                                        if (Cattacked.getX() == Table.secondPlayerFrontRow && Cattacked.getY() == k)
+                                            isAttackedTank = true;
+                                    }
                                 }
                             }
+                            if (tankOneLeast && !isAttackedTank) {
+                                output.add(OutputHelper.usesAbility(5, Cattacker, Cattacked));
+                                break;
+                            }
                         }
-                        if (tankOneLeast && !isAttackedTank) {
-                            output.add(OutputHelper.usesAbility(5, Cattacker, Cattacked));
-                            break;
-                        }
+
                         //Actions toDo;
                         if (((Minion) table.arr[Cattacker.getX()][Cattacker.getY()]).name.equals("Disciple")) {
                             ((Disciple) table.arr[Cattacker.getX()][Cattacker.getY()]).action(((Minion) table.arr[Cattacked.getX()][Cattacked.getY()]));
@@ -403,22 +405,23 @@ public class TakeAction {
                                 output.add(OutputHelper.usesAbility(4, Cattacker, Cattacked));
                                 break;
                             }
-                        }
-                        boolean tankOneLeast = false;
-                        boolean isAttackedTank = false;
-                        for (int k = 0; k < 5; ++k) {
-                            if (!table.arr[Table.firstPlayerFrontRow][k].isNull) {
-                                if (((Minion) table.arr[Table.firstPlayerFrontRow][k]).isTank) {
-                                    tankOneLeast = true;
-                                    if (Cattacked.getX() == Table.firstPlayerFrontRow && Cattacked.getY() == k)
-                                        isAttackedTank = true;
+                            boolean tankOneLeast = false;
+                            boolean isAttackedTank = false;
+                            for (int k = 0; k < 5; ++k) {
+                                if (!table.arr[Table.firstPlayerFrontRow][k].isNull) {
+                                    if (((Minion) table.arr[Table.firstPlayerFrontRow][k]).isTank) {
+                                        tankOneLeast = true;
+                                        if (Cattacked.getX() == Table.firstPlayerFrontRow && Cattacked.getY() == k)
+                                            isAttackedTank = true;
+                                    }
                                 }
                             }
+                            if (tankOneLeast && !isAttackedTank) {
+                                output.add(OutputHelper.usesAbility(5, Cattacker, Cattacked));
+                                break;
+                            }
                         }
-                        if (tankOneLeast && !isAttackedTank) {
-                            output.add(OutputHelper.usesAbility(5, Cattacker, Cattacked));
-                            break;
-                        }
+
                         //Actions toDo;
                         if (((Minion) table.arr[Cattacker.getX()][Cattacker.getY()]).name.equals("Disciple")) {
                             ((Disciple) table.arr[Cattacker.getX()][Cattacker.getY()]).action(((Minion) table.arr[Cattacked.getX()][Cattacked.getY()]));
@@ -464,9 +467,11 @@ public class TakeAction {
                             break;
                         }
                         playerTwo.hero.health -= ((Minion) table.arr[badForYou.getX()][badForYou.getY()]).attackDamage;
+                        ((Minion) table.arr[badForYou.getX()][badForYou.getY()]).isValidTurn = false;
                         if (playerTwo.hero.health <= 0) {
                             output.add(OutputHelper.announceVictory(1));
                             playerOne.wins++;
+                            oneWins.setX(oneWins.getX() + 1);
                             break;
                         }
                     }
@@ -483,9 +488,11 @@ public class TakeAction {
                             break;
                         }
                         playerOne.hero.health -= ((Minion) table.arr[badForYou.getX()][badForYou.getY()]).attackDamage;
+                        ((Minion) table.arr[badForYou.getX()][badForYou.getY()]).isValidTurn = false;
                         if (playerOne.hero.health <= 0) {
                             output.add(OutputHelper.announceVictory(2));
                             playerTwo.wins++;
+                            twoWins.setX(twoWins.getX() + 1);
                             break;
                         }
                     }
@@ -697,11 +704,11 @@ public class TakeAction {
                     break;
 
                 case "getPlayerOneWins":
-                    output.add(OutputHelper.AnnounceNoVictories(1, playerOne.wins));
+                    output.add(OutputHelper.AnnounceNoVictories(1, oneWins.getX()));
                     break;
 
                 case "getPlayerTwoWins":
-                    output.add(OutputHelper.AnnounceNoVictories(2, playerTwo.wins));
+                    output.add(OutputHelper.AnnounceNoVictories(2, oneWins.getX()));
                     break;
             }
         }

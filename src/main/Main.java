@@ -77,9 +77,15 @@ public final class Main {
         decksOfPlayers.putThemRightBaby(playerOneInputDecks, playerTwoInputDecks);
         /* End of implementation of the game */
         TakeAction actions = new TakeAction();
+        MyInteger winsOne = new MyInteger();
+        MyInteger winsTwo = new MyInteger();
+        winsOne.setX(0);
+        winsTwo.setX(0);
         for (int i = 0; i < inputData.getGames().size(); ++i) {
+            Player playerOne = new Player();
+            Player playerTwo = new Player();
             //System.out.println(i + " " + inputData.getGames().size());
-            actions.start(decksOfPlayers, inputData.getGames().get(i), output, i + 1);
+            actions.start(decksOfPlayers, inputData.getGames().get(i), output, i + 1, playerOne, playerTwo, winsOne, winsTwo);
         }
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();
