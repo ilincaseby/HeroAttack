@@ -24,8 +24,11 @@ class FireStorm extends Environment {
     }
     public void ability(Cards[][] arr, int row) {
         for (int j = 0; j < 5; ++j) {
-            if (arr[row][j].isMinion == true)
+            if (arr[row][j].isMinion == true) {
                 ((Minion) arr[row][j]).health -= 1;
+                if (((Minion) arr[row][j]).health <= 0)
+                    arr[row][j] = new nullCard();
+            }
         }
     }
 }

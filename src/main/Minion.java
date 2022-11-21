@@ -74,6 +74,8 @@ class TheRipper extends Minion implements Actions {
     }
     public void action(Minion unluckyGuy) {
         unluckyGuy.attackDamage -= 2;
+        if (unluckyGuy.attackDamage < 0)
+            unluckyGuy.attackDamage = 0;
         this.isValidTurn = false;
     }
 }

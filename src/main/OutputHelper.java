@@ -44,7 +44,7 @@ public class OutputHelper {
         if (whichError == 3)
             error = "Attacker card is frozen.";
         if (whichError == 4)
-            error = "Attacked card is not of type 'Tank’.";
+            error = "Attacked card is not of type 'Tank'.";
         node.put("error", error);
         return node;
     }
@@ -71,7 +71,7 @@ public class OutputHelper {
         if (whichError == 4)
             err = "Attacked card does not belong to the enemy.";
         if (whichError == 5)
-            err = "Attacked card is not of type 'Tank’.";
+            err = "Attacked card is not of type 'Tank'.";
         toAdd.put("error", err);
         return toAdd;
     }
@@ -83,7 +83,7 @@ public class OutputHelper {
         if (whichError == 2)
             err = "Attacker card has already attacked this turn.";
         if (whichError == 3)
-            err = "Attacked card is not of type 'Tank’.";
+            err = "Attacked card is not of type 'Tank'.";
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "useAttackHero");
@@ -161,7 +161,7 @@ public class OutputHelper {
                 for (int k = 0; k < minCard.colors.size(); ++k) {
                     arr.add(minCard.colors.get(k));
                 }
-                nodeCards.putArray("colors").add(arr);
+                nodeCards.set("colors", arr);
                 nodeCards.put("name", minCard.name);
             }
             if (player.inHand.get(i).isEnv) {
@@ -172,12 +172,12 @@ public class OutputHelper {
                 for (int k = 0; k < envCard.colors.size(); ++k) {
                     arr.add(envCard.colors.get(k));
                 }
-                nodeCards.putArray("colors").add(arr);
+                nodeCards.set("colors", arr);
                 nodeCards.put("name", envCard.name);
             }
             arrayNode.add(nodeCards);
         }
-        node.putArray("output").add(arrayNode);
+        node.set("output", arrayNode);
         return node;
     }
 
@@ -226,6 +226,7 @@ public class OutputHelper {
         node.put("command", "getCardsOnTable");
         ArrayNode arrayNode = mapper.createArrayNode();
         for (int i = 0; i < 4; ++i) {
+            ArrayNode arrayNode1 = mapper.createArrayNode();
             for (int j = 0; j < 5; ++j) {
 //                if (table.arr[i][j].isEnv) {
 //                    System.out.println(i + " " + j + " " + ((Environment) table.arr[i][j]).isEnv);
@@ -241,13 +242,14 @@ public class OutputHelper {
                     for (int k = 0; k < minCard.colors.size(); ++k) {
                         arr.add(minCard.colors.get(k));
                     }
-                    nodeCard.putArray("colors").add(arr);
+                    nodeCard.set("colors", arr);
                     nodeCard.put("name", minCard.name);
-                    arrayNode.add(nodeCard);
+                    arrayNode1.add(nodeCard);
                 }
             }
+            arrayNode.add(arrayNode1);
         }
-        node.putArray("output").add(arrayNode);
+        node.set("output", arrayNode);
         return node;
     }
 
@@ -298,7 +300,7 @@ public class OutputHelper {
         for (int i = 0; i < minCard.colors.size(); ++i) {
             arrayNode.add(minCard.colors.get(i));
         }
-        auxNode.putArray("colors").add(arrayNode);
+        auxNode.set("colors", arrayNode);
         auxNode.put("name", minCard.name);
         node.set("output", auxNode);
         return node;
@@ -322,9 +324,9 @@ public class OutputHelper {
         node.put("command", "getEnvironmentCardsInHand");
         node.put("playerIdx", playerIdx);
         ArrayNode arrayNode = mapper.createArrayNode();
-        for (int i = 0; i < player.inPlayDeck.size(); ++i) {
-            if (player.inPlayDeck.get(i).isEnv) {
-                Environment card = ((Environment) player.inPlayDeck.get(i));
+        for (int i = 0; i < player.inHand.size(); ++i) {
+            if (player.inHand.get(i).isEnv) {
+                Environment card = ((Environment) player.inHand.get(i));
                 ObjectNode aux = mapper.createObjectNode();
                 aux.put("mana", card.mana);
                 aux.put("description", card.description);
@@ -332,12 +334,12 @@ public class OutputHelper {
                 for (int k = 0; k < card.colors.size(); ++k) {
                     arr.add(card.colors.get(k));
                 }
-                aux.putArray("colors").add(arr);
+                aux.set("colors", arr);
                 aux.put("name", card.name);
                 arrayNode.add(aux);
             }
         }
-        node.putArray("output").add(arrayNode);
+        node.set("output", arrayNode);
         return node;
     }
     public static ObjectNode getFrozenTable() {
@@ -360,14 +362,14 @@ public class OutputHelper {
                         for (int k = 0; k < minCard.colors.size(); ++i) {
                             arr.add(minCard.colors.get(i));
                         }
-                        nodeCard.putArray("colors").add(arr);
+                        nodeCard.set("colors", arr);
                         nodeCard.put("name", minCard.name);
                         arrayNode.add(nodeCard);
                     }
                 }
             }
         }
-        node.putArray("output").add(arrayNode);
+        node.set("output", arrayNode);
         return node;
     }
 
