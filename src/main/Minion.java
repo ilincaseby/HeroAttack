@@ -36,6 +36,7 @@ public class Minion extends Cards {
         if (name.equals("Goliath") || name.equals("Warden"))
             isTank = true;
         super.isMinion = true;
+        super.isNull = false;
     }
 }
 

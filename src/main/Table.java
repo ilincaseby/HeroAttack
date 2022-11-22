@@ -3,10 +3,11 @@ package main;
 public class Table {
 
     public Cards[][] arr;
-    public static int firstPlayerFrontRow = 2;
-    public static int firstPlayerBackRow = 3;
-    public static int secondPlayerFrontRow = 1;
-    public static int secondPlayerBackRow = 0;
+    public static final int firstPlayerFrontRow = 2;
+    public static final int firstPlayerBackRow = 3;
+    public static final int secondPlayerFrontRow = 1;
+    public static final int secondPlayerBackRow = 0;
+    public static final int sizeCols = 5;
     private static Table instance = null;
     private Table() {
         arr = new Cards[4][5];

@@ -18,6 +18,7 @@ public class Environment extends Cards {
         this.name = name;
         //super.isMinion = false;
         super.isEnv = true;
+        super.isNull = false;
     }
 }
 

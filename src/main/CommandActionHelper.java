@@ -10,12 +10,22 @@ import fileio.Coordinates;
 * is complete take a card from deck.
 * */
 public class CommandActionHelper {
-    public static void endTurnForPlayer(Player playerOne, Player playerTwo, int roundDone) {
+
+    public static final int One = 1;
+    public static final int Two = 2;
+    public static final int Three = 3;
+    public static final int Four = 4;
+    public static final int Five = 5;
+
+    public static void endTurnForPlayer(final Player playerOne, final Player playerTwo,
+                                        final int roundDone) {
         if (roundDone == 2) {
-            if (!playerOne.inPlayDeck.isEmpty())
+            if (!playerOne.inPlayDeck.isEmpty()) {
                 playerOne.inHand.add(playerOne.inPlayDeck.remove(0));
-            if (!playerTwo.inPlayDeck.isEmpty())
+            }
+            if (!playerTwo.inPlayDeck.isEmpty()) {
                 playerTwo.inHand.add(playerTwo.inPlayDeck.remove(0));
+            }
         }
         Table table = Table.getInstance();
         boolean check = playerOne.turn;
@@ -35,8 +45,8 @@ public class CommandActionHelper {
         }
     }
 
-    public static void unfroze(Table table, int stRow, int ndRow) {
-        for (int i = 0; i < 5; ++i) {
+    public static void unfroze(final Table table, final int stRow, final int ndRow) {
+        for (int i = 0; i < Table.sizeCols; ++i) {
             Cards cardStRow = table.arr[stRow][i];
             Cards cardNdRow = table.arr[ndRow][i];
             if (!cardStRow.isNull && cardStRow.isMinion) {
@@ -52,19 +62,20 @@ public class CommandActionHelper {
         }
     }
 
-    public static void placeCardCommand(Player player, int handIdx, int frontRow, int backRow, ArrayNode output) {
+    public static void placeCardCommand(final Player player, final int handIdx, final int frontRow,
+                                        final int backRow, final ArrayNode output) {
         if (player.inHand.get(handIdx).isEnv) {
             //System.out.println(((Environment)playerOne.inPlayDeck.get(handIdx)).name);
-            output.add(OutputHelper.toStringPlaceCard(handIdx, 1));
+            output.add(OutputHelper.toStringPlaceCard(handIdx, One));
             return;
         }
         if (((Minion) player.inHand.get(handIdx)).mana > player.mana) {
-            output.add(OutputHelper.toStringPlaceCard(handIdx, 2));
+            output.add(OutputHelper.toStringPlaceCard(handIdx, Two));
             return;
         }
         Table table = Table.getInstance();
         boolean foundASpace = false;
-        for (int k = 0; k < 5; ++k) {
+        for (int k = 0; k < Table.sizeCols; ++k) {
             if (table.arr[frontRow][k].isNull) {
                 if (((Minion) player.inHand.get(handIdx)).name.equals("The Ripper")) {
                     player.mana -= ((Minion) player.inHand.get(handIdx)).mana;
@@ -95,7 +106,7 @@ public class CommandActionHelper {
         if (foundASpace) {
             return;
         }
-        for (int k = 0; k < 5; ++k) {
+        for (int k = 0; k < Table.sizeCols; ++k) {
             if (table.arr[backRow][k].isNull) {
                 //Cards cardTest = playerOne.inPlayDeck.remove(handIdx);
                 if (((Minion) player.inHand.get(handIdx)).name.equals("Sentinel")) {
@@ -124,27 +135,31 @@ public class CommandActionHelper {
                 }
             }
         }
-        if (foundASpace)
+        if (foundASpace) {
             return;
-        output.add(OutputHelper.toStringPlaceCard(handIdx, 3));
+        }
+        output.add(OutputHelper.toStringPlaceCard(handIdx, Three));
     }
 
-    public static void usesAttackCommandHelper(Coordinates attacker, Coordinates attacked, int frontRowMe, int backRowMe, int frontRowDujman, ArrayNode output) {
+    public static void usesAttackCommandHelper(final Coordinates attacker,
+                                               final Coordinates attacked,
+                                               final int frontRowMe, final int backRowMe,
+                                               final int frontRowDujman, final ArrayNode output) {
         if (attacked.getX() == frontRowMe || attacked.getX() == backRowMe) {
-            output.add(OutputHelper.usesAttack(1, attacker, attacked));
+            output.add(OutputHelper.usesAttack(One, attacker, attacked));
             return;
         }
         Table table = Table.getInstance();
         if (!((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn) {
-            output.add(OutputHelper.usesAttack(2, attacker, attacked));
+            output.add(OutputHelper.usesAttack(Two, attacker, attacked));
             return;
         }
         if (((Minion) table.arr[attacker.getX()][attacker.getY()]).isFrozen()) {
-            output.add(OutputHelper.usesAttack(3, attacker, attacked));
+            output.add(OutputHelper.usesAttack(Three, attacker, attacked));
             return;
         }
         if (noTanksAttackedTanksExist(frontRowDujman, attacked.getX(), attacked.getY())) {
-            output.add(OutputHelper.usesAttack(4, attacker, attacked));
+            output.add(OutputHelper.usesAttack(Four, attacker, attacked));
             return;
         }
         int damage = ((Minion) table.arr[attacker.getX()][attacker.getY()]).attackDamage;
@@ -156,16 +171,17 @@ public class CommandActionHelper {
         ((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn = false;
     }
 
-    public static boolean noTanksAttackedTanksExist(int auxRow, int attackedX, int attackedY) {
+    public static boolean noTanksAttackedTanksExist(final int auxRow, final int attackedX, final int attackedY) {
         Table table = Table.getInstance();
         boolean isAttackedLeastOneTank = false;
         boolean areThereAnyTanks = false;
-        for (int k = 0; k < 5; ++k) {
+        for (int k = 0; k < Table.sizeCols; ++k) {
             if (!table.arr[auxRow][k].isNull) {
                 if (((Minion) table.arr[auxRow][k]).isTank) {
                     areThereAnyTanks = true;
-                    if (auxRow == attackedX && k == attackedY)
+                    if (auxRow == attackedX && k == attackedY) {
                         isAttackedLeastOneTank = true;
+                    }
                 }
             }
         }

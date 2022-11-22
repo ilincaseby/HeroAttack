@@ -52,7 +52,7 @@ public class CommandActionHelperModule2 {
             return;
         }
         if (affectedRow != fRowEnemy && affectedRow != bRowEnemy) {
-            output.add(OutputHelper.errorEnvironment(3, handIdx, affectedRow));
+            output.add(OutputHelper.errorEnvironment(CommandActionHelper.Three, handIdx, affectedRow));
             return;
         }
         if (envCard.isHeartHound) {
