@@ -19,12 +19,12 @@ public class Table {
     public void clearTable() {
         for (int i = 0; i < 4; ++i) {
             for (int j = 0; j < 5; ++j) {
-                arr[i][j] = new nullCard();
+                arr[i][j] = new NullCard();
             }
         }
     }
     public void clearPosition(int i, int j) {
-        arr[i][j] = new nullCard();
+        arr[i][j] = new NullCard();
     }
     public void shiftCards(int i, int j) {
         for (;j< 4; ++j) {

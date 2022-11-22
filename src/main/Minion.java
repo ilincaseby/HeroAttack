@@ -11,7 +11,6 @@ public class Minion extends Cards {
     public String name;
     public final List<String> colors;
     public boolean isTank = false;
-    private boolean validAttack = true;
     private boolean isFrozen = false;
     public boolean isValidTurn = true;
 
@@ -23,20 +22,8 @@ public class Minion extends Cards {
         isFrozen = false;
     }
 
-    public boolean isValidAttack() {
-        return validAttack;
-    }
-
     public boolean isFrozen() {
         return isFrozen;
-    }
-
-    public void resetAttack() {
-        validAttack = true;
-    }
-
-    public void hasAttacked() {
-        validAttack = false;
     }
 
     public Minion(int mana, int health, int attackDamage, String description, String name, List<String> colors) {
@@ -45,7 +32,7 @@ public class Minion extends Cards {
         this.attackDamage = attackDamage;
         this.description = description;
         this.name = name;
-        this.colors = new ArrayList<String>(colors);
+        this.colors = new ArrayList<>(colors);
         if (name.equals("Goliath") || name.equals("Warden"))
             isTank = true;
         super.isMinion = true;

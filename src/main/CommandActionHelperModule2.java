@@ -63,9 +63,11 @@ public class CommandActionHelperModule2 {
             }
         }
         if (envCard.isWinterfell) {
+            assert envCard instanceof Winterfell;
             ((Winterfell) envCard).ability(Table.getInstance().arr, affectedRow);
         }
         if (envCard.isFireStorm) {
+            assert envCard instanceof FireStorm;
             ((FireStorm) envCard).ability(Table.getInstance().arr, affectedRow);
         }
         player.mana -= envCard.mana;

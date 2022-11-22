@@ -6,9 +6,9 @@ public class Cards {
     public boolean isEnv = false;
 }
 
-class nullCard extends Cards{
+class NullCard extends Cards{
     public int specific;
-    public nullCard() {
+    public NullCard() {
         specific = 0;
         //super.isMinion = false;
         super.isNull = true;

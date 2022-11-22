@@ -153,32 +153,40 @@ public class OutputHelper {
             ObjectNode nodeCards = mapper.createObjectNode();
             if (player.inHand.get(i).isMinion) {
                 Minion minCard = ((Minion) player.inHand.get(i));
-                nodeCards.put("mana", minCard.mana);
-                nodeCards.put("attackDamage", minCard.attackDamage);
-                nodeCards.put("health", minCard.health);
-                nodeCards.put("description", minCard.description);
-                ArrayNode arr = mapper.createArrayNode();
-                for (int k = 0; k < minCard.colors.size(); ++k) {
-                    arr.add(minCard.colors.get(k));
-                }
-                nodeCards.set("colors", arr);
-                nodeCards.put("name", minCard.name);
+                duplicateErrorQuickFix(mapper, nodeCards, minCard);
             }
             if (player.inHand.get(i).isEnv) {
                 Environment envCard = ((Environment) player.inHand.get(i));
-                nodeCards.put("mana", envCard.mana);
-                nodeCards.put("description", envCard.description);
-                ArrayNode arr = mapper.createArrayNode();
-                for (int k = 0; k < envCard.colors.size(); ++k) {
-                    arr.add(envCard.colors.get(k));
-                }
-                nodeCards.set("colors", arr);
-                nodeCards.put("name", envCard.name);
+                duplicateCodeErrorQuickFix1(mapper, nodeCards, envCard);
             }
             arrayNode.add(nodeCards);
         }
         node.set("output", arrayNode);
         return node;
+    }
+
+    private static void duplicateCodeErrorQuickFix1(ObjectMapper mapper, ObjectNode nodeCards, Environment envCard) {
+        nodeCards.put("mana", envCard.mana);
+        nodeCards.put("description", envCard.description);
+        ArrayNode arr = mapper.createArrayNode();
+        for (int k = 0; k < envCard.colors.size(); ++k) {
+            arr.add(envCard.colors.get(k));
+        }
+        nodeCards.set("colors", arr);
+        nodeCards.put("name", envCard.name);
+    }
+
+    private static void duplicateErrorQuickFix(ObjectMapper mapper, ObjectNode nodeCards, Minion minCard) {
+        nodeCards.put("mana", minCard.mana);
+        nodeCards.put("attackDamage", minCard.attackDamage);
+        nodeCards.put("health", minCard.health);
+        nodeCards.put("description", minCard.description);
+        ArrayNode arr = mapper.createArrayNode();
+        for (int k = 0; k < minCard.colors.size(); ++k) {
+            arr.add(minCard.colors.get(k));
+        }
+        nodeCards.set("colors", arr);
+        nodeCards.put("name", minCard.name);
     }
 
     public static ObjectNode getPlayerDeck(int index, Player player) {
@@ -191,27 +199,11 @@ public class OutputHelper {
             ObjectNode nodeCards = mapper.createObjectNode();
             if (player.inPlayDeck.get(i).isMinion) {
                 Minion minCard = ((Minion) player.inPlayDeck.get(i));
-                nodeCards.put("mana", minCard.mana);
-                nodeCards.put("attackDamage", minCard.attackDamage);
-                nodeCards.put("health", minCard.health);
-                nodeCards.put("description", minCard.description);
-                ArrayNode arr = mapper.createArrayNode();
-                for (int k = 0; k < minCard.colors.size(); ++k) {
-                    arr.add(minCard.colors.get(k));
-                }
-                nodeCards.set("colors", arr);
-                nodeCards.put("name", minCard.name);
+                duplicateErrorQuickFix(mapper, nodeCards, minCard);
             }
             if (player.inPlayDeck.get(i).isEnv) {
                 Environment envCard = ((Environment) player.inPlayDeck.get(i));
-                nodeCards.put("mana", envCard.mana);
-                nodeCards.put("description", envCard.description);
-                ArrayNode arr = mapper.createArrayNode();
-                for (int k = 0; k < envCard.colors.size(); ++k) {
-                    arr.add(envCard.colors.get(k));
-                }
-                nodeCards.set("colors", arr);
-                nodeCards.put("name", envCard.name);
+                duplicateCodeErrorQuickFix1(mapper, nodeCards, envCard);
             }
             arrayNode.add(nodeCards);
         }
@@ -234,16 +226,7 @@ public class OutputHelper {
                 if (!table.arr[i][j].isNull) {
                     ObjectNode nodeCard = mapper.createObjectNode();
                     Minion minCard = ((Minion) table.arr[i][j]);
-                    nodeCard.put("mana", minCard.mana);
-                    nodeCard.put("attackDamage", minCard.attackDamage);
-                    nodeCard.put("health", minCard.health);
-                    nodeCard.put("description", minCard.description);
-                    ArrayNode arr = mapper.createArrayNode();
-                    for (int k = 0; k < minCard.colors.size(); ++k) {
-                        arr.add(minCard.colors.get(k));
-                    }
-                    nodeCard.set("colors", arr);
-                    nodeCard.put("name", minCard.name);
+                    duplicateErrorQuickFix(mapper, nodeCard, minCard);
                     arrayNode1.add(nodeCard);
                 }
             }
@@ -292,16 +275,7 @@ public class OutputHelper {
         }
         Minion minCard = ((Minion) Table.getInstance().arr[x][y]);
         ObjectNode auxNode = mapper.createObjectNode();
-        auxNode.put("mana", minCard.mana);
-        auxNode.put("attackDamage", minCard.attackDamage);
-        auxNode.put("health", minCard.health);
-        auxNode.put("description", minCard.description);
-        ArrayNode arrayNode = mapper.createArrayNode();
-        for (int i = 0; i < minCard.colors.size(); ++i) {
-            arrayNode.add(minCard.colors.get(i));
-        }
-        auxNode.set("colors", arrayNode);
-        auxNode.put("name", minCard.name);
+        duplicateErrorQuickFix(mapper, auxNode, minCard);
         node.set("output", auxNode);
         return node;
     }
@@ -328,14 +302,7 @@ public class OutputHelper {
             if (player.inHand.get(i).isEnv) {
                 Environment card = ((Environment) player.inHand.get(i));
                 ObjectNode aux = mapper.createObjectNode();
-                aux.put("mana", card.mana);
-                aux.put("description", card.description);
-                ArrayNode arr = mapper.createArrayNode();
-                for (int k = 0; k < card.colors.size(); ++k) {
-                    arr.add(card.colors.get(k));
-                }
-                aux.set("colors", arr);
-                aux.put("name", card.name);
+                duplicateCodeErrorQuickFix1(mapper, aux, card);
                 arrayNode.add(aux);
             }
         }

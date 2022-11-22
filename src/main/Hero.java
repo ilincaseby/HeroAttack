@@ -14,7 +14,7 @@ public class Hero {
         this.mana = mana;
         this.description = description;
         this.colors = colors;
-        this.name = new String(name);
+        this.name = name;
     }
 
     public boolean isValidAttack() {
@@ -68,7 +68,7 @@ class EmpressThorina extends Hero {
         }
         if (indexHighestHealth == -1)
             return;
-        arr[row][indexHighestHealth] = new nullCard();
+        arr[row][indexHighestHealth] = new NullCard();
     }
 }
 

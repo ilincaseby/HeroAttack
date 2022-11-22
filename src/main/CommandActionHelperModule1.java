@@ -45,7 +45,7 @@ public class CommandActionHelperModule1 extends CommandActionHelper{
             ((TheRipper) table.arr[attacker.getX()][attacker.getY()]).action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
         if (((Minion) table.arr[attacked.getX()][attacked.getY()]).health <= 0) {
-            table.arr[attacked.getX()][attacked.getY()] = new nullCard();
+            table.arr[attacked.getX()][attacked.getY()] = new NullCard();
             table.shiftCards(attacked.getX(), attacked.getY());
         }
     }

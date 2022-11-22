@@ -19,12 +19,10 @@ public class PlayersDecks {
     }
 
     public void putCardsinDecks(ArrayList<ArrayList<CardInput>> deck, Decks p) {
-        for (int i = 0; i < deck.size(); ++i) {
+        for (List<CardInput> cardInput : deck) {
             //System.out.println("Am bagat boss");
-            List<CardInput> cardInput = deck.get(i);
             List<Cards> newCards = new ArrayList<>();
-            for (int j = 0; j < cardInput.size(); ++j) {
-                CardInput card = cardInput.get(j);
+            for (CardInput card : cardInput) {
                 if (card.getName().equals("Winterfell")) {
                     Winterfell env = new Winterfell(card.getMana(), card.getDescription(), card.getColors(), card.getName());
                     newCards.add(env);

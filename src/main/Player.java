@@ -6,18 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    public Decks deck;
     public Hero hero;
     public int mana = 0;
     public boolean turn = false;
     public int whichHero = 0;
     public List<Cards> inPlayDeck;
     public List<Cards> inHand = new ArrayList<>();
-    int wins = 0;
-
-    public void setInPlayDeck(List<Cards> playingDeck) {
-        inPlayDeck = playingDeck;
-    }
 
     public void makeThatAHero(CardInput hero) {
         if (hero.getName().equals("General Kocioraw")) {

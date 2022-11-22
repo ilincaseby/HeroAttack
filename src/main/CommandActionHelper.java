@@ -150,7 +150,7 @@ public class CommandActionHelper {
         int damage = ((Minion) table.arr[attacker.getX()][attacker.getY()]).attackDamage;
         ((Minion) table.arr[attacked.getX()][attacked.getY()]).health -= damage;
         if (((Minion) table.arr[attacked.getX()][attacked.getY()]).health <= 0) {
-            table.arr[attacked.getX()][attacked.getY()] = new nullCard();
+            table.arr[attacked.getX()][attacked.getY()] = new NullCard();
             table.shiftCards(attacked.getX(), attacked.getY());
         }
         ((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn = false;
@@ -169,8 +169,6 @@ public class CommandActionHelper {
                 }
             }
         }
-        if (!isAttackedLeastOneTank && areThereAnyTanks)
-            return true;
-        return false;
+        return !isAttackedLeastOneTank && areThereAnyTanks;
     }
 }

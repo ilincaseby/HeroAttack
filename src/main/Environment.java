@@ -28,10 +28,10 @@ class FireStorm extends Environment {
     }
     public void ability(Cards[][] arr, int row) {
         for (int j = 0; j < 5; ++j) {
-            if (arr[row][j].isMinion == true) {
+            if (arr[row][j].isMinion) {
                 ((Minion) arr[row][j]).health -= 1;
                 if (((Minion) arr[row][j]).health <= 0)
-                    arr[row][j] = new nullCard();
+                    arr[row][j] = new NullCard();
             }
         }
     }
@@ -44,7 +44,7 @@ class Winterfell extends Environment {
     }
     public void ability(Cards[][] arr, int row) {
         for (int j = 0; j < 5; ++j) {
-            if (arr[row][j].isNull == false) {
+            if (!arr[row][j].isNull) {
                 ((Minion) arr[row][j]).freeze();
             }
         }
@@ -60,7 +60,7 @@ class HeartHound extends Environment {
         int indexHighestHealth = -1;
         int maxHealth = 0;
         for (int j = 0; j < 5; ++j) {
-            if (arr[row][j].isMinion == true) {
+            if (arr[row][j].isMinion) {
                 if (((Minion) arr[row][j]).health > maxHealth) {
                     indexHighestHealth = j;
                     maxHealth = ((Minion) arr[row][j]).health;
@@ -82,10 +82,10 @@ class HeartHound extends Environment {
         if (row == 3)
             mirrorIndex = 0;
         //System.out.println(mirrorIndex);
-        if (arr[mirrorIndex][indexHighestHealth].isNull == false)
+        if (!arr[mirrorIndex][indexHighestHealth].isNull)
             return -1;
         arr[mirrorIndex][indexHighestHealth] = arr[row][indexHighestHealth];
-        arr[row][indexHighestHealth] = new nullCard();
+        arr[row][indexHighestHealth] = new NullCard();
         return 1;
     }
 }
