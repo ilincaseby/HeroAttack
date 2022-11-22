@@ -35,7 +35,7 @@ public class Environment extends Cards {
     /**
      * Setter
      * **/
-    public void setDescription(String description) {
+    public void setDescription(final String description) {
         this.description = description;
     }
 
@@ -56,7 +56,7 @@ public class Environment extends Cards {
     /**
      * Setter
      * **/
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
@@ -70,7 +70,7 @@ public class Environment extends Cards {
     /**
      * Setter
      * **/
-    public void setWinterfell(boolean winterfell) {
+    public void setWinterfell(final boolean winterfell) {
         isWinterfell = winterfell;
     }
 
@@ -84,7 +84,7 @@ public class Environment extends Cards {
     /**
      * Setter
      * **/
-    public void setFireStorm(boolean fireStorm) {
+    public void setFireStorm(final boolean fireStorm) {
         isFireStorm = fireStorm;
     }
 
@@ -98,7 +98,7 @@ public class Environment extends Cards {
     /**
      * Setter
      * **/
-    public void setHeartHound(boolean heartHound) {
+    public void setHeartHound(final boolean heartHound) {
         isHeartHound = heartHound;
     }
 

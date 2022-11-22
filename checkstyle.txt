@@ -13,11 +13,6 @@ Starting audit...
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\CommandActionHelperModule1.java:90: Line is longer than 100 characters (found 123). [LineLength]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\CommandActionHelperModule2.java:5:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:24:25: Parameter mana should be final. [FinalParameters]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:38:32: Parameter description should be final. [FinalParameters]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:59:25: Parameter name should be final. [FinalParameters]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:73:31: Parameter winterfell should be final. [FinalParameters]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:87:30: Parameter fireStorm should be final. [FinalParameters]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:101:31: Parameter heartHound should be final. [FinalParameters]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:118:5: Redundant 'public' modifier. [RedundantModifier]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:136:5: Redundant 'public' modifier. [RedundantModifier]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Environment.java:151:5: Redundant 'public' modifier. [RedundantModifier]
@@ -53,4 +48,4 @@ Starting audit...
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Table.java:10:29: Name 'sizeCols' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:66:13: switch without "default" clause. [MissingSwitchDefault]
 Audit done.
-Checkstyle ends with 53 errors.
+Checkstyle ends with 48 errors.
