@@ -123,8 +123,8 @@ class FireStorm extends Environment {
     public void ability(final Cards[][] arr, final int row) {
         for (int j = 0; j < Table.sizeCols; ++j) {
             if (arr[row][j].isMinion()) {
-                ((Minion) arr[row][j]).health -= 1;
-                if (((Minion) arr[row][j]).health <= 0) {
+                ((Minion) arr[row][j]).setHealth(((Minion) arr[row][j]).getHealth() - 1);
+                if (((Minion) arr[row][j]).getHealth() <= 0) {
                     arr[row][j] = new NullCard();
                 }
             }
@@ -158,9 +158,9 @@ class HeartHound extends Environment {
         int maxHealth = 0;
         for (int j = 0; j < Table.sizeCols; ++j) {
             if (arr[row][j].isMinion()) {
-                if (((Minion) arr[row][j]).health > maxHealth) {
+                if (((Minion) arr[row][j]).getHealth() > maxHealth) {
                     indexHighestHealth = j;
-                    maxHealth = ((Minion) arr[row][j]).health;
+                    maxHealth = ((Minion) arr[row][j]).getHealth();
                 }
             }
         }

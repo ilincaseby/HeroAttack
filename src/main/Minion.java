@@ -4,15 +4,117 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Minion extends Cards {
-    public int mana;
-    public int health;
-    public int attackDamage;
-    public String description;
-    public String name;
-    public final List<String> colors;
-    public boolean isTank = false;
+    private int mana;
+    private int health;
+    private int attackDamage;
+    private String description;
+    private String name;
+    private final List<String> colors;
+    private boolean isTank = false;
     private boolean isFrozen = false;
-    public boolean isValidTurn = true;
+    private boolean isValidTurn = true;
+
+    /**
+     * Getter
+     * **/
+    public boolean isTank() {
+        return isTank;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setTank(final boolean tank) {
+        isTank = tank;
+    }
+
+    /**
+     * Getter
+     * **/
+    public int getMana() {
+        return mana;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setMana(final int mana) {
+        this.mana = mana;
+    }
+
+    /**
+     * Getter
+     * **/
+    public int getHealth() {
+        return health;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setHealth(final int health) {
+        this.health = health;
+    }
+
+    /**
+     * Getter
+     * **/
+    public int getAttackDamage() {
+        return attackDamage;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setAttackDamage(final int attackDamage) {
+        this.attackDamage = attackDamage;
+    }
+
+    /**
+     * Getter
+     * **/
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    /**
+     * Getter
+     * **/
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    /**
+     * Getter
+     * **/
+    public boolean isValidTurn() {
+        return isValidTurn;
+    }
+
+    public void setValidTurn(final boolean validTurn) {
+        isValidTurn = validTurn;
+    }
+
+    /**
+     * Getter
+     * **/
+    public List<String> getColors() {
+        return colors;
+    }
 
     /**
      Method to call when the card used his attack.
@@ -61,10 +163,10 @@ class Miraj extends Minion implements Actions {
         super(mana, health, attackDamage, description, name, colors);
     }
     public void action(final Minion unluckyGuy) {
-        int aux = unluckyGuy.health;
-        unluckyGuy.health = this.health;
-        this.health = aux;
-        this.isValidTurn = false;
+        int aux = unluckyGuy.getHealth();
+        unluckyGuy.setHealth(this.getHealth());
+        this.setHealth(aux);
+        this.setValidTurn(false);
     }
 }
 
@@ -74,11 +176,11 @@ class TheRipper extends Minion implements Actions {
         super(mana, health, attackDamage, description, name, colors);
     }
     public void action(final Minion unluckyGuy) {
-        unluckyGuy.attackDamage -= 2;
-        if (unluckyGuy.attackDamage < 0) {
-            unluckyGuy.attackDamage = 0;
+        unluckyGuy.setAttackDamage(unluckyGuy.getAttackDamage() - 2);
+        if (unluckyGuy.getAttackDamage() < 0) {
+            unluckyGuy.setAttackDamage(0);
         }
-        this.isValidTurn = false;
+        this.setValidTurn(false);
     }
 }
 
@@ -90,10 +192,10 @@ class TheCursedOne extends Minion implements Actions {
 
     @Override
     public void action(final Minion unluckyGuy) {
-        int aux = unluckyGuy.health;
-        unluckyGuy.health = unluckyGuy.attackDamage;
-        unluckyGuy.attackDamage = aux;
-        this.isValidTurn = false;
+        int aux = unluckyGuy.getHealth();
+        unluckyGuy.setHealth(unluckyGuy.getAttackDamage());
+        unluckyGuy.setAttackDamage(aux);
+        this.setValidTurn(false);
     }
 }
 
@@ -105,7 +207,7 @@ class Disciple extends Minion implements Actions {
 
     @Override
     public void action(final Minion luckyGuy) {
-        luckyGuy.health += 2;
-        this.isValidTurn = false;
+        luckyGuy.setHealth(luckyGuy.getHealth() + 2);
+        this.setValidTurn(false);
     }
 }

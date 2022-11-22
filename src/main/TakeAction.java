@@ -179,37 +179,37 @@ public class TakeAction {
             if (!card.isNull()) {
                 if (card.isMinion()) {
                     Minion minionCard = (Minion) card;
-                    if (minionCard.name.equals("The Cursed One")) {
-                        TheCursedOne env = new TheCursedOne(minionCard.mana, minionCard.health,
-                                minionCard.attackDamage, minionCard.description, minionCard.name,
-                                minionCard.colors);
+                    if (minionCard.getName().equals("The Cursed One")) {
+                        TheCursedOne env = new TheCursedOne(minionCard.getMana(), minionCard.getHealth(),
+                                minionCard.getAttackDamage(), minionCard.getDescription(), minionCard.getName(),
+                                minionCard.getColors());
                         player.inPlayDeck.add(env);
                         continue;
                     }
-                    if (minionCard.name.equals("Disciple")) {
-                        Disciple env = new Disciple(minionCard.mana, minionCard.health,
-                                minionCard.attackDamage, minionCard.description, minionCard.name,
-                                minionCard.colors);
+                    if (minionCard.getName().equals("Disciple")) {
+                        Disciple env = new Disciple(minionCard.getMana(), minionCard.getHealth(),
+                                minionCard.getAttackDamage(), minionCard.getDescription(), minionCard.getName(),
+                                minionCard.getColors());
                         player.inPlayDeck.add(env);
                         continue;
                     }
-                    if (minionCard.name.equals("Miraj")) {
-                        Miraj env = new Miraj(minionCard.mana, minionCard.health,
-                                minionCard.attackDamage, minionCard.description, minionCard.name,
-                                minionCard.colors);
+                    if (minionCard.getName().equals("Miraj")) {
+                        Miraj env = new Miraj(minionCard.getMana(), minionCard.getHealth(),
+                                minionCard.getAttackDamage(), minionCard.getDescription(), minionCard.getName(),
+                                minionCard.getColors());
                         player.inPlayDeck.add(env);
                         continue;
                     }
-                    if (minionCard.name.equals("The Ripper")) {
-                        TheRipper env = new TheRipper(minionCard.mana, minionCard.health,
-                                minionCard.attackDamage, minionCard.description, minionCard.name,
-                                minionCard.colors);
+                    if (minionCard.getName().equals("The Ripper")) {
+                        TheRipper env = new TheRipper(minionCard.getMana(), minionCard.getHealth(),
+                                minionCard.getAttackDamage(), minionCard.getDescription(), minionCard.getName(),
+                                minionCard.getColors());
                         player.inPlayDeck.add(env);
                         continue;
                     }
-                    Minion newMini = new Minion(minionCard.mana, minionCard.health,
-                            minionCard.attackDamage, minionCard.description, minionCard.name,
-                            minionCard.colors);
+                    Minion newMini = new Minion(minionCard.getMana(), minionCard.getHealth(),
+                            minionCard.getAttackDamage(), minionCard.getDescription(), minionCard.getName(),
+                            minionCard.getColors());
                     player.inPlayDeck.add(newMini);
                 }
                 if (card.isEnv()) {

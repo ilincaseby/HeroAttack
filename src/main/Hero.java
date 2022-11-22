@@ -120,8 +120,8 @@ class LordRoyce extends Hero {
         int highestAttackDamage = -1;
         for (int j = 0; j < Table.sizeCols; ++j) {
             if (!arr[row][j].isNull()) {
-                if (((Minion) arr[row][j]).attackDamage > highestAttackDamage) {
-                    highestAttackDamage = ((Minion) arr[row][j]).attackDamage;
+                if (((Minion) arr[row][j]).getAttackDamage() > highestAttackDamage) {
+                    highestAttackDamage = ((Minion) arr[row][j]).getAttackDamage();
                     indexHighestAttackLevel = j;
                 }
             }
@@ -142,8 +142,8 @@ class EmpressThorina extends Hero {
         int highestHealth = -1;
         for (int j = 0; j < Table.sizeCols; ++j) {
             if (!arr[row][j].isNull()) {
-                if (((Minion) arr[row][j]).health > highestHealth) {
-                    highestHealth = ((Minion) arr[row][j]).health;
+                if (((Minion) arr[row][j]).getHealth() > highestHealth) {
+                    highestHealth = ((Minion) arr[row][j]).getHealth();
                     indexHighestHealth = j;
                 }
             }
@@ -162,7 +162,7 @@ class KingMudFace extends Hero {
     public void earthBorn(final Cards[][] arr, final int row) {
         for (int j = 0; j < Table.sizeCols; ++j) {
             if (!arr[row][j].isNull()) {
-                ((Minion) arr[row][j]).health++;
+                ((Minion) arr[row][j]).setHealth(((Minion) arr[row][j]).getHealth() + 1);
             }
         }
     }
@@ -175,7 +175,8 @@ class GeneralKocioraw extends Hero {
     public void bloodThrist(final Cards[][] arr, final int row) {
         for (int j = 0; j < Table.sizeCols; ++j) {
             if (!arr[row][j].isNull()) {
-                ((Minion) arr[row][j]).attackDamage++;
+                ((Minion) arr[row][j]).
+                        setAttackDamage(((Minion) arr[row][j]).getAttackDamage() + 1);
             }
         }
     }

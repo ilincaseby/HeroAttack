@@ -19,11 +19,11 @@ public class CommandActionHelperModule1 extends CommandActionHelper {
             output.add(OutputHelper.usesAbility(1, attacker, attacked));
             return;
         }
-        if (!((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn) {
+        if (!((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn()) {
             output.add(OutputHelper.usesAbility(2, attacker, attacked));
             return;
         }
-        String nameOfCard = ((Minion) table.arr[attacker.getX()][attacker.getY()]).name;
+        String nameOfCard = ((Minion) table.arr[attacker.getX()][attacker.getY()]).getName();
         if (nameOfCard.equals("Disciple")) {
             if (fRowMe != attacked.getX() && bRowMe != attacked.getX()) {
                 output.add(OutputHelper.usesAbility(Three, attacker, attacked));
@@ -42,23 +42,24 @@ public class CommandActionHelperModule1 extends CommandActionHelper {
             }
         }
 
-        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("Disciple")) {
+        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).getName().equals("Disciple")) {
             ((Disciple) table.arr[attacker.getX()][attacker.getY()]).
                     action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
-        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("Miraj")) {
+        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).getName().equals("Miraj")) {
             ((Miraj) table.arr[attacker.getX()][attacker.getY()])
                     .action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
-        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("The Cursed One")) {
+        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).getName().
+                equals("The Cursed One")) {
             ((TheCursedOne) table.arr[attacker.getX()][attacker.getY()])
                     .action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
-        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("The Ripper")) {
+        if (((Minion) table.arr[attacker.getX()][attacker.getY()]).getName().equals("The Ripper")) {
             ((TheRipper) table.arr[attacker.getX()][attacker.getY()])
                     .action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
-        if (((Minion) table.arr[attacked.getX()][attacked.getY()]).health <= 0) {
+        if (((Minion) table.arr[attacked.getX()][attacked.getY()]).getHealth() <= 0) {
             table.arr[attacked.getX()][attacked.getY()] = new NullCard();
             table.shiftCards(attacked.getX(), attacked.getY());
         }
@@ -75,21 +76,21 @@ public class CommandActionHelperModule1 extends CommandActionHelper {
             output.add(OutputHelper.useAttackHero(1, attacker));
             return;
         }
-        if (!((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn) {
+        if (!((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn()) {
             output.add((OutputHelper.useAttackHero(2, attacker)));
             return;
         }
         for (int k = 0; k < Table.sizeCols; ++k) {
             if (!table.arr[fRowDujman][k].isNull()) {
-                if (((Minion) table.arr[fRowDujman][k]).isTank) {
+                if (((Minion) table.arr[fRowDujman][k]).isTank()) {
                     output.add(OutputHelper.useAttackHero(Three, attacker));
                     return;
                 }
             }
         }
         enemy.hero.setHealth(enemy.hero.getHealth()
-                - ((Minion) table.arr[attacker.getX()][attacker.getY()]).attackDamage);
-        ((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn = false;
+                - ((Minion) table.arr[attacker.getX()][attacker.getY()]).getAttackDamage());
+        ((Minion) table.arr[attacker.getX()][attacker.getY()]).setValidTurn(false);
         if (enemy.hero.getHealth() <= 0) {
             output.add(OutputHelper.announceVictory(whichPlayer));
             winsToInc.setX(winsToInc.getX() + 1);

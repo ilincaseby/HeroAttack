@@ -242,16 +242,16 @@ public final class OutputHelper {
 
     private static void duplicateErrorQuickFix(final ObjectMapper mapper,
                                                final ObjectNode nodeCards, final Minion minCard) {
-        nodeCards.put("mana", minCard.mana);
-        nodeCards.put("attackDamage", minCard.attackDamage);
-        nodeCards.put("health", minCard.health);
-        nodeCards.put("description", minCard.description);
+        nodeCards.put("mana", minCard.getMana());
+        nodeCards.put("attackDamage", minCard.getAttackDamage());
+        nodeCards.put("health", minCard.getHealth());
+        nodeCards.put("description", minCard.getDescription());
         ArrayNode arr = mapper.createArrayNode();
-        for (int k = 0; k < minCard.colors.size(); ++k) {
-            arr.add(minCard.colors.get(k));
+        for (int k = 0; k < minCard.getColors().size(); ++k) {
+            arr.add(minCard.getColors().get(k));
         }
         nodeCards.set("colors", arr);
-        nodeCards.put("name", minCard.name);
+        nodeCards.put("name", minCard.getName());
     }
 
     /**
@@ -418,16 +418,16 @@ public final class OutputHelper {
                     Minion minCard = ((Minion) table.arr[i][j]);
                     if (minCard.isFrozen()) {
                         ObjectNode nodeCard = mapper.createObjectNode();
-                        nodeCard.put("mana", minCard.mana);
-                        nodeCard.put("attackDamage", minCard.attackDamage);
-                        nodeCard.put("health", minCard.health);
-                        nodeCard.put("description", minCard.description);
+                        nodeCard.put("mana", minCard.getMana());
+                        nodeCard.put("attackDamage", minCard.getAttackDamage());
+                        nodeCard.put("health", minCard.getHealth());
+                        nodeCard.put("description", minCard.getDescription());
                         ArrayNode arr = mapper.createArrayNode();
-                        for (int k = 0; k < minCard.colors.size(); ++i) {
-                            arr.add(minCard.colors.get(i));
+                        for (int k = 0; k < minCard.getColors().size(); ++i) {
+                            arr.add(minCard.getColors().get(i));
                         }
                         nodeCard.set("colors", arr);
-                        nodeCard.put("name", minCard.name);
+                        nodeCard.put("name", minCard.getName());
                         arrayNode.add(nodeCard);
                     }
                 }
