@@ -48,8 +48,6 @@ Starting audit...
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Player.java:13:24: Variable 'inPlayDeck' must be private and have accessor methods. [VisibilityModifier]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Player.java:14:24: Variable 'inHand' must be private and have accessor methods. [VisibilityModifier]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Player.java:20:47: 'hero' hides a field. [HiddenField]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\PlayersDecks.java:10:18: Variable 'playerOneDecks' must be private and have accessor methods. [VisibilityModifier]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\PlayersDecks.java:11:18: Variable 'playerTwoDecks' must be private and have accessor methods. [VisibilityModifier]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\StatisticInfoHelper.java:5:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Table.java:5:22: Variable 'arr' must be private and have accessor methods. [VisibilityModifier]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Table.java:6:29: Name 'firstPlayerFrontRow' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
@@ -59,4 +57,4 @@ Starting audit...
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Table.java:10:29: Name 'sizeCols' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:66:13: switch without "default" clause. [MissingSwitchDefault]
 Audit done.
-Checkstyle ends with 59 errors.
+Checkstyle ends with 57 errors.

@@ -29,8 +29,8 @@ public class TakeAction {
         playerOne.makeThatAHero(heroOne);
         playerTwo.makeThatAHero(heroTwo);
         // TODO Put the shuffled in the deck of each player
-        deepCopyCards(playerDeck.playerOneDecks, indexOne, playerOne, shuffleSeed);
-        deepCopyCards(playerDeck.playerTwoDecks, indexTwo, playerTwo, shuffleSeed);
+        deepCopyCards(playerDeck.getPlayerOneDecks(), indexOne, playerOne, shuffleSeed);
+        deepCopyCards(playerDeck.getPlayerTwoDecks(), indexTwo, playerTwo, shuffleSeed);
         if (startingPlayer == 1) {
             playerOne.turn = true;
         } else {

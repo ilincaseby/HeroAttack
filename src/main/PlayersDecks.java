@@ -7,8 +7,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayersDecks {
-    public Decks playerOneDecks = new Decks();
-    public Decks playerTwoDecks = new Decks();
+    private Decks playerOneDecks = new Decks();
+    private Decks playerTwoDecks = new Decks();
+
+    /**
+     * Getter
+     * **/
+    public Decks getPlayerOneDecks() {
+        return playerOneDecks;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setPlayerOneDecks(final Decks playerOneDecks) {
+        this.playerOneDecks = playerOneDecks;
+    }
+
+    /**
+     * Getter
+     * **/
+    public Decks getPlayerTwoDecks() {
+        return playerTwoDecks;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setPlayerTwoDecks(final Decks playerTwoDecks) {
+        this.playerTwoDecks = playerTwoDecks;
+    }
 
     /**
      * A helper for the custom constructor.
