@@ -5,17 +5,28 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fileio.Coordinates;
 
-public class OutputHelper {
-    public static ObjectNode toStringPlaceCard(int handIdx, int whichError) {
-        if (whichError == 0)
+public final class OutputHelper {
+
+    private OutputHelper() { }
+
+    /**
+     * Method to call when an add to output in case of error
+     * at placeCard command is desired.
+     * **/
+    public static ObjectNode toStringPlaceCard(final int handIdx, final int whichError) {
+        if (whichError == 0) {
             return null;
+        }
         String err = "";
-        if (whichError == 1)
+        if (whichError == CommandActionHelper.One) {
             err = "Cannot place environment card on table.";
-        if (whichError == 2)
+        }
+        if (whichError == CommandActionHelper.Two) {
             err = "Not enough mana to place card on table.";
-        if (whichError == 3)
+        }
+        if (whichError == CommandActionHelper.Three) {
             err = "Cannot place card on table since row is full.";
+        }
 
         ObjectNode newNode = (new ObjectMapper()).createObjectNode();
         newNode.put("command", "placeCard");
@@ -24,7 +35,12 @@ public class OutputHelper {
         return newNode;
     }
 
-    public static ObjectNode usesAttack(int whichError, Coordinates attacker, Coordinates attacked) {
+    /**
+     * Method to call when an add to output in case of error
+     * useAttackCard command is desired.
+     * **/
+    public static ObjectNode usesAttack(final int whichError,
+                                        final Coordinates attacker, final Coordinates attacked) {
         ObjectMapper format = new ObjectMapper();
         ObjectNode node = format.createObjectNode();
         node.put("command", "cardUsesAttack");
@@ -37,19 +53,28 @@ public class OutputHelper {
         node.set("cardAttacker", coordattacker);
         node.set("cardAttacked", coordattacked);
         String error = "";
-        if (whichError == 1)
+        if (whichError == CommandActionHelper.One) {
             error = "Attacked card does not belong to the enemy.";
-        if (whichError == 2)
+        }
+        if (whichError == CommandActionHelper.Two) {
             error = "Attacker card has already attacked this turn.";
-        if (whichError == 3)
+        }
+        if (whichError == CommandActionHelper.Three) {
             error = "Attacker card is frozen.";
-        if (whichError == 4)
+        }
+        if (whichError == CommandActionHelper.Four) {
             error = "Attacked card is not of type 'Tank'.";
+        }
         node.put("error", error);
         return node;
     }
 
-    public static ObjectNode usesAbility(int whichError, Coordinates attacker, Coordinates attacked) {
+    /**
+     * Method to call when an add to output in case of error
+     * cardUseAbility command is desired.
+     * **/
+    public static ObjectNode usesAbility(final int whichError,
+                                         final Coordinates attacker, final Coordinates attacked) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode toAdd = mapper.createObjectNode();
         toAdd.put("command", "cardUsesAbility");
@@ -62,28 +87,40 @@ public class OutputHelper {
         coordEd.put("y", attacked.getY());
         toAdd.set("cardAttacked", coordEd);
         String err = "";
-        if (whichError == 1)
+        if (whichError == CommandActionHelper.One) {
             err = "Attacker card is frozen.";
-        if (whichError == 2)
+        }
+        if (whichError == CommandActionHelper.Two) {
             err = "Attacker card has already attacked this turn.";
-        if (whichError == 3)
+        }
+        if (whichError == CommandActionHelper.Three) {
             err = "Attacked card does not belong to the current player.";
-        if (whichError == 4)
+        }
+        if (whichError == CommandActionHelper.Four) {
             err = "Attacked card does not belong to the enemy.";
-        if (whichError == 5)
+        }
+        if (whichError == CommandActionHelper.Five) {
             err = "Attacked card is not of type 'Tank'.";
+        }
         toAdd.put("error", err);
         return toAdd;
     }
 
-    public static ObjectNode useAttackHero(int whichError, Coordinates attacker) {
+    /**
+     * Method to call when an add to output in case of error
+     * useAttackHero is desired.
+     * **/
+    public static ObjectNode useAttackHero(final int whichError, final Coordinates attacker) {
         String err = "";
-        if (whichError == 1)
+        if (whichError == CommandActionHelper.One) {
             err = "Attacker card is frozen.";
-        if (whichError == 2)
+        }
+        if (whichError == CommandActionHelper.Two) {
             err = "Attacker card has already attacked this turn.";
-        if (whichError == 3)
+        }
+        if (whichError == CommandActionHelper.Three) {
             err = "Attacked card is not of type 'Tank'.";
+        }
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "useAttackHero");
@@ -95,7 +132,11 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode announceVictory(int whichPlayer) {
+    /**
+     * Method to call when an add to output in case of
+     * winning.
+     * **/
+    public static ObjectNode announceVictory(final int whichPlayer) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         if (whichPlayer == 1) {
@@ -106,16 +147,24 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode errorHero(int whichCase, int affectedRow) {
+    /**
+     * Method to call when an add to output in case of error
+     * useHeroAbility command is desired.
+     * **/
+    public static ObjectNode errorHero(final int whichCase, final int affectedRow) {
         String err = "";
-        if (whichCase == 1)
+        if (whichCase == CommandActionHelper.One) {
             err = "Not enough mana to use hero's ability.";
-        if (whichCase == 2)
+        }
+        if (whichCase == CommandActionHelper.Two) {
             err = "Hero has already attacked this turn.";
-        if (whichCase == 3)
+        }
+        if (whichCase == CommandActionHelper.Three) {
             err = "Selected row does not belong to the enemy.";
-        if (whichCase == 4)
+        }
+        if (whichCase == CommandActionHelper.Four) {
             err = "Selected row does not belong to the current player.";
+        }
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "useHeroAbility");
@@ -124,16 +173,25 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode errorEnvironment(int whichCase, int handIdx, int affectedRow) {
+    /**
+     * Method to call when an add to output in case of error
+     * cardUseEnivronment is desired.
+     * **/
+    public static ObjectNode errorEnvironment(final int whichCase,
+                                              final int handIdx, final int affectedRow) {
         String err = "";
-        if (whichCase == 1)
+        if (whichCase == CommandActionHelper.One) {
             err = "Chosen card is not of type environment.";
-        if (whichCase == 2)
+        }
+        if (whichCase == CommandActionHelper.Two) {
             err = "Not enough mana to use environment card.";
-        if (whichCase == 3)
+        }
+        if (whichCase == CommandActionHelper.Three) {
             err = "Chosen row does not belong to the enemy.";
-        if (whichCase == 4)
+        }
+        if (whichCase == CommandActionHelper.Four) {
             err = "Cannot steal enemy card since the player's row is full.";
+        }
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "useEnvironmentCard");
@@ -143,7 +201,11 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode cardsInHand(int playerIndex, Player player) {
+    /**
+     * Method to call when an add to output in case of showing
+     * cards in Hand is desired.
+     * **/
+    public static ObjectNode cardsInHand(final int playerIndex, final Player player) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getCardsInHand");
@@ -151,11 +213,11 @@ public class OutputHelper {
         ArrayNode arrayNode = mapper.createArrayNode();
         for (int i = 0; i < player.inHand.size(); ++i) {
             ObjectNode nodeCards = mapper.createObjectNode();
-            if (player.inHand.get(i).isMinion) {
+            if (player.inHand.get(i).isMinion()) {
                 Minion minCard = ((Minion) player.inHand.get(i));
                 duplicateErrorQuickFix(mapper, nodeCards, minCard);
             }
-            if (player.inHand.get(i).isEnv) {
+            if (player.inHand.get(i).isEnv()) {
                 Environment envCard = ((Environment) player.inHand.get(i));
                 duplicateCodeErrorQuickFix1(mapper, nodeCards, envCard);
             }
@@ -165,18 +227,21 @@ public class OutputHelper {
         return node;
     }
 
-    private static void duplicateCodeErrorQuickFix1(ObjectMapper mapper, ObjectNode nodeCards, Environment envCard) {
-        nodeCards.put("mana", envCard.mana);
-        nodeCards.put("description", envCard.description);
+    private static void duplicateCodeErrorQuickFix1(final ObjectMapper mapper,
+                                                    final ObjectNode nodeCards,
+                                                    final Environment envCard) {
+        nodeCards.put("mana", envCard.getMana());
+        nodeCards.put("description", envCard.getDescription());
         ArrayNode arr = mapper.createArrayNode();
-        for (int k = 0; k < envCard.colors.size(); ++k) {
-            arr.add(envCard.colors.get(k));
+        for (int k = 0; k < envCard.getColors().size(); ++k) {
+            arr.add(envCard.getColors().get(k));
         }
         nodeCards.set("colors", arr);
-        nodeCards.put("name", envCard.name);
+        nodeCards.put("name", envCard.getName());
     }
 
-    private static void duplicateErrorQuickFix(ObjectMapper mapper, ObjectNode nodeCards, Minion minCard) {
+    private static void duplicateErrorQuickFix(final ObjectMapper mapper,
+                                               final ObjectNode nodeCards, final Minion minCard) {
         nodeCards.put("mana", minCard.mana);
         nodeCards.put("attackDamage", minCard.attackDamage);
         nodeCards.put("health", minCard.health);
@@ -189,7 +254,11 @@ public class OutputHelper {
         nodeCards.put("name", minCard.name);
     }
 
-    public static ObjectNode getPlayerDeck(int index, Player player) {
+    /**
+     * Add to output in case of deck of a player
+     * is desired
+     * **/
+    public static ObjectNode getPlayerDeck(final int index, final Player player) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getPlayerDeck");
@@ -197,11 +266,11 @@ public class OutputHelper {
         ArrayNode arrayNode = mapper.createArrayNode();
         for (int i = 0; i < player.inPlayDeck.size(); ++i) {
             ObjectNode nodeCards = mapper.createObjectNode();
-            if (player.inPlayDeck.get(i).isMinion) {
+            if (player.inPlayDeck.get(i).isMinion()) {
                 Minion minCard = ((Minion) player.inPlayDeck.get(i));
                 duplicateErrorQuickFix(mapper, nodeCards, minCard);
             }
-            if (player.inPlayDeck.get(i).isEnv) {
+            if (player.inPlayDeck.get(i).isEnv()) {
                 Environment envCard = ((Environment) player.inPlayDeck.get(i));
                 duplicateCodeErrorQuickFix1(mapper, nodeCards, envCard);
             }
@@ -211,19 +280,20 @@ public class OutputHelper {
         return node;
     }
 
+    /**
+     * Method to call when an add to output in case of showing
+     * cards on the table is desired.
+     * **/
     public static ObjectNode getCardsOnTable() {
         Table table = Table.getInstance();
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getCardsOnTable");
         ArrayNode arrayNode = mapper.createArrayNode();
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < CommandActionHelper.Four; ++i) {
             ArrayNode arrayNode1 = mapper.createArrayNode();
-            for (int j = 0; j < 5; ++j) {
-//                if (table.arr[i][j].isEnv) {
-//                    System.out.println(i + " " + j + " " + ((Environment) table.arr[i][j]).isEnv);
-//                }
-                if (!table.arr[i][j].isNull) {
+            for (int j = 0; j < Table.sizeCols; ++j) {
+                if (!table.arr[i][j].isNull()) {
                     ObjectNode nodeCard = mapper.createObjectNode();
                     Minion minCard = ((Minion) table.arr[i][j]);
                     duplicateErrorQuickFix(mapper, nodeCard, minCard);
@@ -236,7 +306,11 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode getPlayerTurn(int whichOne) {
+    /**
+     * Method to call when an add to output in case of showing
+     * playerTurn is desired.
+     * **/
+    public static ObjectNode getPlayerTurn(final int whichOne) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getPlayerTurn");
@@ -244,7 +318,11 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode getPlayerHero(int which, Player player) {
+    /**
+     * Method to call when an add to output in case of showing
+     * hero of player is desired.
+     * **/
+    public static ObjectNode getPlayerHero(final int which, final Player player) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getPlayerHero");
@@ -263,13 +341,17 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode getCardAtPosition(int x, int y) {
+    /**
+     * Method to call when an add to output in case of showing
+     * cards at a specific position is desired.
+     * **/
+    public static ObjectNode getCardAtPosition(final int x, final int y) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getCardAtPosition");
         node.put("x", x);
         node.put("y", y);
-        if (Table.getInstance().arr[x][y].isNull) {
+        if (Table.getInstance().arr[x][y].isNull()) {
             node.put("output", "No card available at that position.");
             return node;
         }
@@ -279,7 +361,13 @@ public class OutputHelper {
         node.set("output", auxNode);
         return node;
     }
-    public static ObjectNode getPlayerMana(int p, Player playerOne, Player playerTwo) {
+
+    /**
+     * Method to call when an add to output in case of showing
+     * player mana is desired.
+     * **/
+    public static ObjectNode getPlayerMana(final int p,
+                                           final Player playerOne, final Player playerTwo) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getPlayerMana");
@@ -292,14 +380,18 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode getEnvironmentCardsInHand(Player player, int playerIdx) {
+    /**
+     * Method to call when an add to output in case of showing
+     * environment cards in Hand is desired.
+     * **/
+    public static ObjectNode getEnvironmentCardsInHand(final Player player, final int playerIdx) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getEnvironmentCardsInHand");
         node.put("playerIdx", playerIdx);
         ArrayNode arrayNode = mapper.createArrayNode();
         for (int i = 0; i < player.inHand.size(); ++i) {
-            if (player.inHand.get(i).isEnv) {
+            if (player.inHand.get(i).isEnv()) {
                 Environment card = ((Environment) player.inHand.get(i));
                 ObjectNode aux = mapper.createObjectNode();
                 duplicateCodeErrorQuickFix1(mapper, aux, card);
@@ -309,15 +401,20 @@ public class OutputHelper {
         node.set("output", arrayNode);
         return node;
     }
+
+    /**
+     * Method to call when an add to output in case of showing
+     * cards frozen on the table is desired.
+     * **/
     public static ObjectNode getFrozenTable() {
         Table table = Table.getInstance();
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getFrozenCardsOnTable");
         ArrayNode arrayNode = mapper.createArrayNode();
-        for (int i = 0; i < 4; ++i) {
-            for (int j = 0; j < 5; ++j) {
-                if (!table.arr[i][j].isNull) {
+        for (int i = 0; i < CommandActionHelper.Four; ++i) {
+            for (int j = 0; j < Table.sizeCols; ++j) {
+                if (!table.arr[i][j].isNull()) {
                     Minion minCard = ((Minion) table.arr[i][j]);
                     if (minCard.isFrozen()) {
                         ObjectNode nodeCard = mapper.createObjectNode();
@@ -340,7 +437,11 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode getTotalGamesPlayed(int gamesCounter) {
+    /**
+     * Method to call when an add to output in case of showing
+     * number of games played is desired.
+     * **/
+    public static ObjectNode getTotalGamesPlayed(final int gamesCounter) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getTotalGamesPlayed");
@@ -348,7 +449,11 @@ public class OutputHelper {
         return node;
     }
 
-    public static ObjectNode AnnounceNoVictories(int whichCase, int wins) {
+    /**
+     * Method to call when an add to output in case of showing
+     * number of victories for a player is desired.
+     * **/
+    public static ObjectNode announceNoVictories(final int whichCase, final int wins) {
         ObjectMapper mapper = new ObjectMapper();
         ObjectNode node = mapper.createObjectNode();
         if (whichCase == 1) {

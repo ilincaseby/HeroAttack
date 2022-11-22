@@ -13,25 +13,33 @@ public class Player {
     public List<Cards> inPlayDeck;
     public List<Cards> inHand = new ArrayList<>();
 
-    public void makeThatAHero(CardInput hero) {
+    /**
+     * A custom constructor which translates the default
+     * input for hero into this implementation
+     * **/
+    public void makeThatAHero(final CardInput hero) {
         if (hero.getName().equals("General Kocioraw")) {
-            this.hero = new GeneralKocioraw(hero.getMana(), hero.getDescription(), hero.getColors());
-            whichHero = 2;
+            this.hero = new GeneralKocioraw(hero.getMana(),
+                    hero.getDescription(), hero.getColors());
+            whichHero = CommandActionHelper.Two;
             return;
         }
         if (hero.getName().equals("Empress Thorina")) {
-            this.hero = new EmpressThorina(hero.getMana(), hero.getDescription(), hero.getColors());
-            whichHero = 1;
+            this.hero = new EmpressThorina(hero.getMana(),
+                    hero.getDescription(), hero.getColors());
+            whichHero = CommandActionHelper.One;
             return;
         }
         if (hero.getName().equals("King Mudface")) {
-            this.hero = new KingMudFace(hero.getMana(), hero.getDescription(), hero.getColors());
-            whichHero = 3;
+            this.hero = new KingMudFace(hero.getMana(),
+                    hero.getDescription(), hero.getColors());
+            whichHero = CommandActionHelper.Three;
             return;
         }
         if (hero.getName().equals("Lord Royce")) {
-            this.hero = new LordRoyce(hero.getMana(), hero.getDescription(), hero.getColors());
-            whichHero = 4;
+            this.hero = new LordRoyce(hero.getMana(),
+                    hero.getDescription(), hero.getColors());
+            whichHero = CommandActionHelper.Four;
         }
     }
 }

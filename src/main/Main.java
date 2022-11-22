@@ -85,7 +85,8 @@ public final class Main {
             Player playerOne = new Player();
             Player playerTwo = new Player();
             //System.out.println(i + " " + inputData.getGames().size());
-            actions.start(decksOfPlayers, inputData.getGames().get(i), output, i + 1, playerOne, playerTwo, winsOne, winsTwo);
+            actions.start(decksOfPlayers, inputData.getGames().get(i), output,
+                    i + 1, playerOne, playerTwo, winsOne, winsTwo);
         }
 
         ObjectWriter objectWriter = objectMapper.writerWithDefaultPrettyPrinter();

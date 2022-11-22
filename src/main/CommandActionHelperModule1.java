@@ -3,7 +3,13 @@ package main;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import fileio.Coordinates;
 
-public class CommandActionHelperModule1 extends CommandActionHelper{
+public class CommandActionHelperModule1 extends CommandActionHelper {
+
+    //private CommandActionHelperModule1() { }
+
+    /**
+     * Method to use an ability of a card
+     * **/
     public static void cardUsesAbilityHelper(final Coordinates attacker,
                                              final Coordinates attacked, final ArrayNode output,
                                              final int fRowMe, final int bRowMe,
@@ -37,20 +43,20 @@ public class CommandActionHelperModule1 extends CommandActionHelper{
         }
 
         if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("Disciple")) {
-            ((Disciple) table.arr[attacker.getX()][attacker.getY()]).action
-                    (((Minion) table.arr[attacked.getX()][attacked.getY()]));
+            ((Disciple) table.arr[attacker.getX()][attacker.getY()]).
+                    action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
         if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("Miraj")) {
-            ((Miraj) table.arr[attacker.getX()][attacker.getY()]).action
-                    (((Minion) table.arr[attacked.getX()][attacked.getY()]));
+            ((Miraj) table.arr[attacker.getX()][attacker.getY()])
+                    .action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
         if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("The Cursed One")) {
-            ((TheCursedOne) table.arr[attacker.getX()][attacker.getY()]).action
-                    (((Minion) table.arr[attacked.getX()][attacked.getY()]));
+            ((TheCursedOne) table.arr[attacker.getX()][attacker.getY()])
+                    .action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
         if (((Minion) table.arr[attacker.getX()][attacker.getY()]).name.equals("The Ripper")) {
-            ((TheRipper) table.arr[attacker.getX()][attacker.getY()]).action
-                    (((Minion) table.arr[attacked.getX()][attacked.getY()]));
+            ((TheRipper) table.arr[attacker.getX()][attacker.getY()])
+                    .action(((Minion) table.arr[attacked.getX()][attacked.getY()]));
         }
         if (((Minion) table.arr[attacked.getX()][attacked.getY()]).health <= 0) {
             table.arr[attacked.getX()][attacked.getY()] = new NullCard();
@@ -58,6 +64,9 @@ public class CommandActionHelperModule1 extends CommandActionHelper{
         }
     }
 
+    /**
+     * Method to call to attack a hero
+     * **/
     public static void useAttackHero(final Player enemy, final int fRowDujman,
                                      final int whichPlayer, final MyInteger winsToInc,
                                      final Coordinates attacker, final ArrayNode output) {
@@ -71,7 +80,7 @@ public class CommandActionHelperModule1 extends CommandActionHelper{
             return;
         }
         for (int k = 0; k < Table.sizeCols; ++k) {
-            if (!table.arr[fRowDujman][k].isNull) {
+            if (!table.arr[fRowDujman][k].isNull()) {
                 if (((Minion) table.arr[fRowDujman][k]).isTank) {
                     output.add(OutputHelper.useAttackHero(Three, attacker));
                     return;

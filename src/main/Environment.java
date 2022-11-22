@@ -3,49 +3,144 @@ package main;
 import java.util.List;
 
 public class Environment extends Cards {
-    public int mana;
-    public String description;
-    public final List<String> colors;
-    public String name;
-    public boolean isWinterfell = false;
-    public boolean isFireStorm = false;
-    public boolean isHeartHound = false;
+    private int mana;
+    private String description;
+    private final List<String> colors;
+    private String name;
+    private boolean isWinterfell = false;
+    private boolean isFireStorm = false;
+    private boolean isHeartHound = false;
 
-    public Environment(int mana, String description, List<String> colors, String name) {
+    /**
+     * Getter
+     * **/
+    public int getMana() {
+        return mana;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    /**
+     * Getter
+     * **/
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Getter
+     * **/
+    public List<String> getColors() {
+        return colors;
+    }
+
+    /**
+     * Getter
+     * **/
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Getter
+     * **/
+    public boolean isWinterfell() {
+        return isWinterfell;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setWinterfell(boolean winterfell) {
+        isWinterfell = winterfell;
+    }
+
+    /**
+     * Getter
+     * **/
+    public boolean isFireStorm() {
+        return isFireStorm;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setFireStorm(boolean fireStorm) {
+        isFireStorm = fireStorm;
+    }
+
+    /**
+     * Getter
+     * **/
+    public boolean isHeartHound() {
+        return isHeartHound;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setHeartHound(boolean heartHound) {
+        isHeartHound = heartHound;
+    }
+
+    public Environment(final int mana, final String description,
+                       final List<String> colors, final String name) {
         this.mana = mana;
         this.description = description;
         this.colors = colors;
         this.name = name;
         //super.isMinion = false;
-        super.isEnv = true;
-        super.isNull = false;
+        super.setEnv(true);
+        super.setNull(false);
     }
 }
 
 class FireStorm extends Environment {
-    public FireStorm(int mana, String description, List<String> colors, String name) {
+    public FireStorm(final int mana, final String description,
+                     final List<String> colors, final String name) {
         super(mana, description, colors, name);
-        super.isFireStorm = true;
+        super.setFireStorm(true);
     }
-    public void ability(Cards[][] arr, int row) {
-        for (int j = 0; j < 5; ++j) {
-            if (arr[row][j].isMinion) {
+    public void ability(final Cards[][] arr, final int row) {
+        for (int j = 0; j < Table.sizeCols; ++j) {
+            if (arr[row][j].isMinion()) {
                 ((Minion) arr[row][j]).health -= 1;
-                if (((Minion) arr[row][j]).health <= 0)
+                if (((Minion) arr[row][j]).health <= 0) {
                     arr[row][j] = new NullCard();
+                }
             }
         }
     }
 }
 
 class Winterfell extends Environment {
-    public Winterfell(int mana, String description, List<String> colors, String name) {
+    public Winterfell(final int mana, final String description,
+                      final List<String> colors, final String name) {
         super(mana, description, colors, name);
-        super.isWinterfell = true;
+        super.setWinterfell(true);
     }
-    public void ability(Cards[][] arr, int row) {
-        for (int j = 0; j < 5; ++j) {
-            if (!arr[row][j].isNull) {
+    public void ability(final Cards[][] arr, final int row) {
+        for (int j = 0; j < Table.sizeCols; ++j) {
+            if (!arr[row][j].isNull()) {
                 ((Minion) arr[row][j]).freeze();
             }
         }
@@ -53,38 +148,41 @@ class Winterfell extends Environment {
 }
 
 class HeartHound extends Environment {
-    public HeartHound(int mana, String description, List<String> colors, String name) {
+    public HeartHound(final int mana, final String description,
+                      final List<String> colors, final String name) {
         super(mana, description, colors, name);
-        super.isHeartHound = true;
+        super.setHeartHound(true);
     }
-    public int ability(Cards[][] arr, int row) {
+    public int ability(final Cards[][] arr, final int row) {
         int indexHighestHealth = -1;
         int maxHealth = 0;
-        for (int j = 0; j < 5; ++j) {
-            if (arr[row][j].isMinion) {
+        for (int j = 0; j < Table.sizeCols; ++j) {
+            if (arr[row][j].isMinion()) {
                 if (((Minion) arr[row][j]).health > maxHealth) {
                     indexHighestHealth = j;
                     maxHealth = ((Minion) arr[row][j]).health;
                 }
             }
         }
-        if (indexHighestHealth == -1)
+        if (indexHighestHealth == CommandActionHelper.negOne) {
             return 1;
-        //System.out.println(row);
-        int mirrorIndex = -1;
-        if (row == 0)
-            mirrorIndex = 3;
-        if (row == 1)
-            mirrorIndex = 2;
-        if (row == 2) {
-            mirrorIndex = 1;
-            //System.out.println(row);
         }
-        if (row == 3)
-            mirrorIndex = 0;
-        //System.out.println(mirrorIndex);
-        if (!arr[mirrorIndex][indexHighestHealth].isNull)
+        int mirrorIndex = CommandActionHelper.negOne;
+        if (row == CommandActionHelper.Zero) {
+            mirrorIndex = CommandActionHelper.Three;
+        }
+        if (row == CommandActionHelper.One) {
+            mirrorIndex = CommandActionHelper.Two;
+        }
+        if (row == CommandActionHelper.Two) {
+            mirrorIndex = CommandActionHelper.One;
+        }
+        if (row == CommandActionHelper.Three) {
+            mirrorIndex = CommandActionHelper.Zero;
+        }
+        if (!arr[mirrorIndex][indexHighestHealth].isNull()) {
             return -1;
+        }
         arr[mirrorIndex][indexHighestHealth] = arr[row][indexHighestHealth];
         arr[row][indexHighestHealth] = new NullCard();
         return 1;
