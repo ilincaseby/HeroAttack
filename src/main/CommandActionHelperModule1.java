@@ -87,9 +87,9 @@ public class CommandActionHelperModule1 extends CommandActionHelper {
                 }
             }
         }
-        enemy.hero.health -= ((Minion) table.arr[attacker.getX()][attacker.getY()]).attackDamage;
+        enemy.hero.setHealth(enemy.hero.getHealth() - ((Minion) table.arr[attacker.getX()][attacker.getY()]).attackDamage);
         ((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn = false;
-        if (enemy.hero.health <= 0) {
+        if (enemy.hero.getHealth() <= 0) {
             output.add(OutputHelper.announceVictory(whichPlayer));
             winsToInc.setX(winsToInc.getX() + 1);
         }

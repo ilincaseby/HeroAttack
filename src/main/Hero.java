@@ -3,12 +3,82 @@ package main;
 import java.util.List;
 
 public class Hero {
-    int mana;
-    String description;
-    List<String> colors;
-    int health = CommandActionHelper.thirty;
+    private int mana;
+    private String description;
+    private List<String> colors;
+    private int health = CommandActionHelper.thirty;
     private boolean validAttack = true;
-    String name;
+    private String name;
+
+    /**
+     * Getter
+     * **/
+    public int getMana() {
+        return mana;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setMana(final int mana) {
+        this.mana = mana;
+    }
+
+    /**
+     * Getter
+     * **/
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    /**
+     * Getter
+     * **/
+    public List<String> getColors() {
+        return colors;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setColors(final List<String> colors) {
+        this.colors = colors;
+    }
+
+    /**
+     * Getter
+     * **/
+    public int getHealth() {
+        return health;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setHealth(final int health) {
+        this.health = health;
+    }
+
+    /**
+     * Getter
+     * **/
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Setter
+     * **/
+    public void setName(final String name) {
+        this.name = name;
+    }
 
     public Hero(final int mana, final String description,
                 final List<String> colors, final String name) {

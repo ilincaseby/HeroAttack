@@ -328,15 +328,15 @@ public final class OutputHelper {
         node.put("command", "getPlayerHero");
         node.put("playerIdx", which);
         ObjectNode auxNode = mapper.createObjectNode();
-        auxNode.put("mana", player.hero.mana);
-        auxNode.put("description", player.hero.description);
+        auxNode.put("mana", player.hero.getMana());
+        auxNode.put("description", player.hero.getDescription());
         ArrayNode arrayNode = mapper.createArrayNode();
-        for (int i = 0; i < player.hero.colors.size(); ++i) {
-            arrayNode.add(player.hero.colors.get(i));
+        for (int i = 0; i < player.hero.getColors().size(); ++i) {
+            arrayNode.add(player.hero.getColors().get(i));
         }
         auxNode.set("colors", arrayNode);
-        auxNode.put("name", player.hero.name);
-        auxNode.put("health", player.hero.health);
+        auxNode.put("name", player.hero.getName());
+        auxNode.put("health", player.hero.getHealth());
         node.set("output", auxNode);
         return node;
     }

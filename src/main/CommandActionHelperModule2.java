@@ -10,7 +10,7 @@ public class CommandActionHelperModule2 {
     public static void abilityHeroUse(final int affectedRow, final Player player,
                                       final int fRowMe, final int bRowMe, final int fRowDujman,
                                       final int bRowDujman, final ArrayNode output) {
-        if (player.hero.mana > player.mana) {
+        if (player.hero.getMana() > player.mana) {
             output.add(OutputHelper.errorHero(CommandActionHelper.One, affectedRow));
             return;
         }
@@ -44,7 +44,7 @@ public class CommandActionHelperModule2 {
             ((LordRoyce) player.hero).subZero(Table.getInstance().arr, affectedRow);
         }
         player.hero.hasAttacked();
-        player.mana -= player.hero.mana;
+        player.mana -= player.hero.getMana();
     }
 
     /**
