@@ -39,11 +39,5 @@ Starting audit...
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Table.java:9:29: Name 'secondPlayerBackRow' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\Table.java:10:29: Name 'sizeCols' must match pattern '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'. [ConstantName]
 [ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:66:13: switch without "default" clause. [MissingSwitchDefault]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:183: Line is longer than 100 characters (found 105). [LineLength]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:184: Line is longer than 100 characters (found 112). [LineLength]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:191: Line is longer than 100 characters (found 112). [LineLength]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:198: Line is longer than 100 characters (found 112). [LineLength]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:205: Line is longer than 100 characters (found 112). [LineLength]
-[ERROR] C:\Users\ilinc\IdeaProjects\GwentStone\oop-asignments-master\oop-asignments-master\teme\tema\.\src\main\TakeAction.java:211: Line is longer than 100 characters (found 108). [LineLength]
 Audit done.
-Checkstyle ends with 46 errors.
+Checkstyle ends with 40 errors.
