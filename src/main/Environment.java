@@ -21,7 +21,7 @@ public class Environment extends Cards {
     /**
      * Setter
      * **/
-    public void setMana(int mana) {
+    public void setMana(final int mana) {
         this.mana = mana;
     }
 
