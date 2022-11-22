@@ -7,6 +7,9 @@ public class Environment extends Cards {
     public String description;
     public final List<String> colors;
     public String name;
+    public boolean isWinterfell = false;
+    public boolean isFireStorm = false;
+    public boolean isHeartHound = false;
 
     public Environment(int mana, String description, List<String> colors, String name) {
         this.mana = mana;
@@ -21,6 +24,7 @@ public class Environment extends Cards {
 class FireStorm extends Environment {
     public FireStorm(int mana, String description, List<String> colors, String name) {
         super(mana, description, colors, name);
+        super.isFireStorm = true;
     }
     public void ability(Cards[][] arr, int row) {
         for (int j = 0; j < 5; ++j) {
@@ -36,6 +40,7 @@ class FireStorm extends Environment {
 class Winterfell extends Environment {
     public Winterfell(int mana, String description, List<String> colors, String name) {
         super(mana, description, colors, name);
+        super.isWinterfell = true;
     }
     public void ability(Cards[][] arr, int row) {
         for (int j = 0; j < 5; ++j) {
@@ -49,6 +54,7 @@ class Winterfell extends Environment {
 class HeartHound extends Environment {
     public HeartHound(int mana, String description, List<String> colors, String name) {
         super(mana, description, colors, name);
+        super.isHeartHound = true;
     }
     public int ability(Cards[][] arr, int row) {
         int indexHighestHealth = -1;

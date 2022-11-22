@@ -111,141 +111,20 @@ public class TakeAction {
                     break;
 
                 case "useHeroAbility":
-                    int affectedRow = actions.get(i).getAffectedRow();
                     if (playerOne.turn) {
-                        if (playerOne.mana < playerOne.hero.mana) {
-                            output.add(OutputHelper.errorHero(1, affectedRow));
-                            break;
-                        }
-                        if (!playerOne.hero.isValidAttack()) {
-                            output.add(OutputHelper.errorHero(2, affectedRow));
-                            break;
-                        }
-                        if (playerOne.whichHero == 1 || playerOne.whichHero == 4) {
-                            if (affectedRow != Table.secondPlayerFrontRow && affectedRow != Table.secondPlayerBackRow) {
-                                output.add(OutputHelper.errorHero(3, affectedRow));
-                                break;
-                            }
-                        }
-                        if (playerOne.whichHero == 2 || playerOne.whichHero == 3) {
-                            if (affectedRow != Table.firstPlayerBackRow && affectedRow != Table.firstPlayerFrontRow) {
-                                output.add(OutputHelper.errorHero(4, affectedRow));
-                                break;
-                            }
-                        }
-                        if (playerOne.whichHero == 1) {
-                            ((EmpressThorina) playerOne.hero).lowBlow(table.arr, affectedRow);
-                        }
-                        if (playerOne.whichHero == 2) {
-                            ((GeneralKocioraw) playerOne.hero).bloodThrist(table.arr, affectedRow);
-                        }
-                        if (playerOne.whichHero == 3) {
-                            ((KingMudFace) playerOne.hero).earthBorn(table.arr, affectedRow);
-                        }
-                        if (playerOne.whichHero == 4) {
-                            ((LordRoyce) playerOne.hero).subZero(table.arr, affectedRow);
-                        }
-                        playerOne.hero.hasAttacked();
-                        playerOne.mana -= playerOne.hero.mana;
+                        CommandActionHelperModule2.abilityHeroUse(actions.get(i).getAffectedRow(), playerOne, Table.firstPlayerFrontRow, Table.firstPlayerBackRow, Table.secondPlayerFrontRow, Table.secondPlayerBackRow, output);
                     }
                     if (playerTwo.turn) {
-                        if (playerTwo.mana < playerTwo.hero.mana) {
-                            output.add(OutputHelper.errorHero(1, affectedRow));
-                            break;
-                        }
-                        if (!playerTwo.hero.isValidAttack()) {
-                            output.add(OutputHelper.errorHero(2, affectedRow));
-                            break;
-                        }
-                        if (playerTwo.whichHero == 1 || playerTwo.whichHero == 4) {
-                            if (affectedRow != Table.firstPlayerFrontRow && affectedRow != Table.firstPlayerBackRow) {
-                                output.add(OutputHelper.errorHero(3, affectedRow));
-                                break;
-                            }
-                        }
-                        if (playerTwo.whichHero == 2 || playerTwo.whichHero == 3) {
-                            if (affectedRow != Table.secondPlayerBackRow && affectedRow != Table.secondPlayerFrontRow) {
-                                output.add(OutputHelper.errorHero(4, affectedRow));
-                                break;
-                            }
-                        }
-                        if (playerTwo.whichHero == 1) {
-                            ((EmpressThorina) playerTwo.hero).lowBlow(table.arr, affectedRow);
-                        }
-                        if (playerTwo.whichHero == 2) {
-                            ((GeneralKocioraw) playerTwo.hero).bloodThrist(table.arr, affectedRow);
-                        }
-                        if (playerTwo.whichHero == 3) {
-                            ((KingMudFace) playerTwo.hero).earthBorn(table.arr, affectedRow);
-                        }
-                        if (playerTwo.whichHero == 4) {
-                            ((LordRoyce) playerTwo.hero).subZero(table.arr, affectedRow);
-                        }
-                        playerTwo.hero.hasAttacked();
-                        playerTwo.mana -= playerTwo.hero.mana;
+                        CommandActionHelperModule2.abilityHeroUse(actions.get(i).getAffectedRow(), playerTwo, Table.secondPlayerFrontRow, Table.secondPlayerBackRow, Table.firstPlayerFrontRow, Table.firstPlayerBackRow, output);
                     }
                     break;
 
                 case "useEnvironmentCard":
-                    int handIndex = actions.get(i).getHandIdx();
-                    int affectedR = actions.get(i).getAffectedRow();
                     if (playerOne.turn) {
-                        if (!playerOne.inHand.get(handIndex).isEnv) {
-                            output.add(OutputHelper.errorEnvironment(1, handIndex, affectedR));
-                            break;
-                        }
-                        Environment envCard = ((Environment) playerOne.inHand.get(handIndex));
-                        if (playerOne.mana < envCard.mana) {
-                            output.add(OutputHelper.errorEnvironment(2, handIndex, affectedR));
-                            break;
-                        }
-                        if (affectedR != Table.secondPlayerBackRow && affectedR != Table.secondPlayerFrontRow) {
-                            output.add(OutputHelper.errorEnvironment(3, handIndex, affectedR));
-                            break;
-                        }
-                        if (envCard.name.equals("Heart Hound")) {
-                            int done = ((HeartHound) envCard).ability(table.arr, affectedR);
-                            if (done == -1) {
-                                output.add(OutputHelper.errorEnvironment(4, handIndex, affectedR));
-                                break;
-                            }
-                        }
-                        if (envCard.name.equals("Winterfell"))
-                            ((Winterfell) envCard).ability(table.arr, affectedR);
-                        if (envCard.name.equals("Firestorm"))
-                            ((FireStorm) envCard).ability(table.arr, affectedR);
-                        playerOne.mana -= envCard.mana;
-                        playerOne.inHand.remove(handIndex);
+                        CommandActionHelperModule2.useEnvironmentCard(playerOne, actions.get(i).getHandIdx(), actions.get(i).getAffectedRow(), Table.secondPlayerFrontRow, Table.secondPlayerBackRow, output);
                     }
                     if (playerTwo.turn) {
-                        if (!playerTwo.inHand.get(handIndex).isEnv) {
-                            output.add(OutputHelper.errorEnvironment(1, handIndex, affectedR));
-                            break;
-                        }
-                        Environment envCard = ((Environment) playerTwo.inHand.get(handIndex));
-                        if (playerTwo.mana < envCard.mana) {
-                            output.add(OutputHelper.errorEnvironment(2, handIndex, affectedR));
-                            break;
-                        }
-                        if (affectedR != Table.firstPlayerBackRow && affectedR != Table.firstPlayerFrontRow) {
-                            output.add(OutputHelper.errorEnvironment(3, handIndex, affectedR));
-                            break;
-                        }
-                        if (envCard.name.equals("Heart Hound")) {
-                            //System.out.println(affectedR);
-                            int done = ((HeartHound) envCard).ability(table.arr, affectedR);
-                            if (done == -1) {
-                                output.add(OutputHelper.errorEnvironment(4, handIndex, affectedR));
-                                break;
-                            }
-                        }
-                        if (envCard.name.equals("Winterfell"))
-                            ((Winterfell) envCard).ability(table.arr, affectedR);
-                        if (envCard.name.equals("Firestorm"))
-                            ((FireStorm) envCard).ability(table.arr, affectedR);
-                        playerTwo.mana -= envCard.mana;
-                        playerTwo.inHand.remove(handIndex);
-                        //playerOne
+                        CommandActionHelperModule2.useEnvironmentCard(playerTwo, actions.get(i).getHandIdx(), actions.get(i).getAffectedRow(), Table.firstPlayerFrontRow, Table.firstPlayerBackRow, output);
                     }
                     break;
 
