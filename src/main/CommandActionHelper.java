@@ -11,16 +11,16 @@ import fileio.Coordinates;
 * */
 public class CommandActionHelper {
 
-    public static final int negOne = -1;
-    public static final int Zero = 0;
-    public static final int One = 1;
-    public static final int Two = 2;
-    public static final int Three = 3;
-    public static final int Four = 4;
-    public static final int Five = 5;
-    public static final int thirty = 30;
-    public static final int Nine = 9;
-    public static final int Ten = 10;
+    public static final int NEGONE = -1;
+    public static final int ZERO = 0;
+    public static final int ONE = 1;
+    public static final int TWO = 2;
+    public static final int THREE = 3;
+    public static final int FOUR = 4;
+    public static final int FIVE = 5;
+    public static final int THIRTY = 30;
+    public static final int NINE = 9;
+    public static final int TEN = 10;
 
     //private CommandActionHelper() { }
 
@@ -43,14 +43,14 @@ public class CommandActionHelper {
         if (check) {
             playerOne.turn = false;
             playerTwo.turn = true;
-            unfroze(table, Table.firstPlayerBackRow, Table.firstPlayerFrontRow);
+            unfroze(table, Table.FIRSTPLAYERBACKROW, Table.FIRSTPLAYERFRONTROW);
             playerOne.hero.resetAttack();
         }
         /* It s done the turn for second player */
         if (!check) {
             playerOne.turn = true;
             playerTwo.turn = false;
-            unfroze(table, Table.secondPlayerBackRow, Table.secondPlayerFrontRow);
+            unfroze(table, Table.SECONDPLAYERBACKROW, Table.SECONDPLAYERFRONTROW);
             playerTwo.hero.resetAttack();
         }
     }
@@ -60,7 +60,7 @@ public class CommandActionHelper {
      * the cards reset their valid attack.
      * **/
     public static void unfroze(final Table table, final int stRow, final int ndRow) {
-        for (int i = 0; i < Table.sizeCols; ++i) {
+        for (int i = 0; i < Table.SIZECOLS; ++i) {
             Cards cardStRow = table.arr[stRow][i];
             Cards cardNdRow = table.arr[ndRow][i];
             if (!cardStRow.isNull() && cardStRow.isMinion()) {
@@ -83,16 +83,16 @@ public class CommandActionHelper {
                                         final int backRow, final ArrayNode output) {
         if (player.inHand.get(handIdx).isEnv()) {
             //System.out.println(((Environment)playerOne.inPlayDeck.get(handIdx)).name);
-            output.add(OutputHelper.toStringPlaceCard(handIdx, One));
+            output.add(OutputHelper.toStringPlaceCard(handIdx, ONE));
             return;
         }
         if (((Minion) player.inHand.get(handIdx)).getMana() > player.mana) {
-            output.add(OutputHelper.toStringPlaceCard(handIdx, Two));
+            output.add(OutputHelper.toStringPlaceCard(handIdx, TWO));
             return;
         }
         Table table = Table.getInstance();
         boolean foundASpace = false;
-        for (int k = 0; k < Table.sizeCols; ++k) {
+        for (int k = 0; k < Table.SIZECOLS; ++k) {
             if (table.arr[frontRow][k].isNull()) {
                 if (((Minion) player.inHand.get(handIdx)).getName().equals("The Ripper")) {
                     player.mana -= ((Minion) player.inHand.get(handIdx)).getMana();
@@ -123,7 +123,7 @@ public class CommandActionHelper {
         if (foundASpace) {
             return;
         }
-        for (int k = 0; k < Table.sizeCols; ++k) {
+        for (int k = 0; k < Table.SIZECOLS; ++k) {
             if (table.arr[backRow][k].isNull()) {
                 //Cards cardTest = playerOne.inPlayDeck.remove(handIdx);
                 if (((Minion) player.inHand.get(handIdx)).getName().equals("Sentinel")) {
@@ -155,7 +155,7 @@ public class CommandActionHelper {
         if (foundASpace) {
             return;
         }
-        output.add(OutputHelper.toStringPlaceCard(handIdx, Three));
+        output.add(OutputHelper.toStringPlaceCard(handIdx, THREE));
     }
 
     /**
@@ -166,24 +166,26 @@ public class CommandActionHelper {
                                                final int frontRowMe, final int backRowMe,
                                                final int frontRowDujman, final ArrayNode output) {
         if (attacked.getX() == frontRowMe || attacked.getX() == backRowMe) {
-            output.add(OutputHelper.usesAttack(One, attacker, attacked));
+            output.add(OutputHelper.usesAttack(ONE, attacker, attacked));
             return;
         }
         Table table = Table.getInstance();
         if (!((Minion) table.arr[attacker.getX()][attacker.getY()]).isValidTurn()) {
-            output.add(OutputHelper.usesAttack(Two, attacker, attacked));
+            output.add(OutputHelper.usesAttack(TWO, attacker, attacked));
             return;
         }
         if (((Minion) table.arr[attacker.getX()][attacker.getY()]).isFrozen()) {
-            output.add(OutputHelper.usesAttack(Three, attacker, attacked));
+            output.add(OutputHelper.usesAttack(THREE, attacker, attacked));
             return;
         }
         if (noTanksAttackedTanksExist(frontRowDujman, attacked.getX(), attacked.getY())) {
-            output.add(OutputHelper.usesAttack(Four, attacker, attacked));
+            output.add(OutputHelper.usesAttack(FOUR, attacker, attacked));
             return;
         }
         int damage = ((Minion) table.arr[attacker.getX()][attacker.getY()]).getAttackDamage();
-        ((Minion) table.arr[attacked.getX()][attacked.getY()]).setHealth(((Minion) table.arr[attacked.getX()][attacked.getY()]).getHealth() - damage);
+        ((Minion) table.arr[attacked.getX()][attacked.getY()]).
+                setHealth(((Minion) table.arr[attacked.getX()][attacked.getY()]).getHealth()
+                        - damage);
         if (((Minion) table.arr[attacked.getX()][attacked.getY()]).getHealth() <= 0) {
             table.arr[attacked.getX()][attacked.getY()] = new NullCard();
             table.shiftCards(attacked.getX(), attacked.getY());
@@ -199,7 +201,7 @@ public class CommandActionHelper {
         Table table = Table.getInstance();
         boolean isAttackedLeastOneTank = false;
         boolean areThereAnyTanks = false;
-        for (int k = 0; k < Table.sizeCols; ++k) {
+        for (int k = 0; k < Table.SIZECOLS; ++k) {
             if (!table.arr[auxRow][k].isNull()) {
                 if (((Minion) table.arr[auxRow][k]).isTank()) {
                     areThereAnyTanks = true;

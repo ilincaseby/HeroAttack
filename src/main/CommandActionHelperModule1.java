@@ -26,18 +26,18 @@ public class CommandActionHelperModule1 extends CommandActionHelper {
         String nameOfCard = ((Minion) table.arr[attacker.getX()][attacker.getY()]).getName();
         if (nameOfCard.equals("Disciple")) {
             if (fRowMe != attacked.getX() && bRowMe != attacked.getX()) {
-                output.add(OutputHelper.usesAbility(Three, attacker, attacked));
+                output.add(OutputHelper.usesAbility(THREE, attacker, attacked));
                 return;
             }
         }
         if (nameOfCard.equals("The Cursed One") || nameOfCard.equals("Miraj")
                                         || nameOfCard.equals("The Ripper")) {
             if (fRowDujman != attacked.getX() && bRowDujman != attacked.getX()) {
-                output.add(OutputHelper.usesAbility(Four, attacker, attacked));
+                output.add(OutputHelper.usesAbility(FOUR, attacker, attacked));
                 return;
             }
             if (noTanksAttackedTanksExist(fRowDujman, attacked.getX(), attacked.getY())) {
-                output.add(OutputHelper.usesAbility(Five, attacker, attacked));
+                output.add(OutputHelper.usesAbility(FIVE, attacker, attacked));
                 return;
             }
         }
@@ -80,10 +80,10 @@ public class CommandActionHelperModule1 extends CommandActionHelper {
             output.add((OutputHelper.useAttackHero(2, attacker)));
             return;
         }
-        for (int k = 0; k < Table.sizeCols; ++k) {
+        for (int k = 0; k < Table.SIZECOLS; ++k) {
             if (!table.arr[fRowDujman][k].isNull()) {
                 if (((Minion) table.arr[fRowDujman][k]).isTank()) {
-                    output.add(OutputHelper.useAttackHero(Three, attacker));
+                    output.add(OutputHelper.useAttackHero(THREE, attacker));
                     return;
                 }
             }

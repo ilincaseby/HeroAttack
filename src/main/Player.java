@@ -21,25 +21,25 @@ public class Player {
         if (hero.getName().equals("General Kocioraw")) {
             this.hero = new GeneralKocioraw(hero.getMana(),
                     hero.getDescription(), hero.getColors());
-            whichHero = CommandActionHelper.Two;
+            whichHero = CommandActionHelper.TWO;
             return;
         }
         if (hero.getName().equals("Empress Thorina")) {
             this.hero = new EmpressThorina(hero.getMana(),
                     hero.getDescription(), hero.getColors());
-            whichHero = CommandActionHelper.One;
+            whichHero = CommandActionHelper.ONE;
             return;
         }
         if (hero.getName().equals("King Mudface")) {
             this.hero = new KingMudFace(hero.getMana(),
                     hero.getDescription(), hero.getColors());
-            whichHero = CommandActionHelper.Three;
+            whichHero = CommandActionHelper.THREE;
             return;
         }
         if (hero.getName().equals("Lord Royce")) {
             this.hero = new LordRoyce(hero.getMana(),
                     hero.getDescription(), hero.getColors());
-            whichHero = CommandActionHelper.Four;
+            whichHero = CommandActionHelper.FOUR;
         }
     }
 }

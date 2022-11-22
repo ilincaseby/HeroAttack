@@ -6,7 +6,7 @@ public class Hero {
     private int mana;
     private String description;
     private List<String> colors;
-    private int health = CommandActionHelper.thirty;
+    private int health = CommandActionHelper.THIRTY;
     private boolean validAttack = true;
     private String name;
 
@@ -112,13 +112,13 @@ public class Hero {
 }
 
 class LordRoyce extends Hero {
-    public LordRoyce(final int mana, final String description, final List<String> colors) {
+    LordRoyce(final int mana, final String description, final List<String> colors) {
         super(mana, description, colors, "Lord Royce");
     }
     public void subZero(final Cards[][] arr, final int row) {
         int indexHighestAttackLevel = -1;
         int highestAttackDamage = -1;
-        for (int j = 0; j < Table.sizeCols; ++j) {
+        for (int j = 0; j < Table.SIZECOLS; ++j) {
             if (!arr[row][j].isNull()) {
                 if (((Minion) arr[row][j]).getAttackDamage() > highestAttackDamage) {
                     highestAttackDamage = ((Minion) arr[row][j]).getAttackDamage();
@@ -134,13 +134,13 @@ class LordRoyce extends Hero {
 }
 
 class EmpressThorina extends Hero {
-    public EmpressThorina(final int mana, final String description, final List<String> colors) {
+    EmpressThorina(final int mana, final String description, final List<String> colors) {
         super(mana, description, colors, "Empress Thorina");
     }
     public void lowBlow(final Cards[][] arr, final int row) {
         int indexHighestHealth = -1;
         int highestHealth = -1;
-        for (int j = 0; j < Table.sizeCols; ++j) {
+        for (int j = 0; j < Table.SIZECOLS; ++j) {
             if (!arr[row][j].isNull()) {
                 if (((Minion) arr[row][j]).getHealth() > highestHealth) {
                     highestHealth = ((Minion) arr[row][j]).getHealth();
@@ -156,11 +156,11 @@ class EmpressThorina extends Hero {
 }
 
 class KingMudFace extends Hero {
-    public KingMudFace(final int mana, final String description, final List<String> colors) {
+    KingMudFace(final int mana, final String description, final List<String> colors) {
         super(mana, description, colors, "King Mudface");
     }
     public void earthBorn(final Cards[][] arr, final int row) {
-        for (int j = 0; j < Table.sizeCols; ++j) {
+        for (int j = 0; j < Table.SIZECOLS; ++j) {
             if (!arr[row][j].isNull()) {
                 ((Minion) arr[row][j]).setHealth(((Minion) arr[row][j]).getHealth() + 1);
             }
@@ -169,11 +169,11 @@ class KingMudFace extends Hero {
 }
 
 class GeneralKocioraw extends Hero {
-    public GeneralKocioraw(final int mana, final String description, final List<String> colors) {
+    GeneralKocioraw(final int mana, final String description, final List<String> colors) {
         super(mana, description, colors, "General Kocioraw");
     }
     public void bloodThrist(final Cards[][] arr, final int row) {
-        for (int j = 0; j < Table.sizeCols; ++j) {
+        for (int j = 0; j < Table.SIZECOLS; ++j) {
             if (!arr[row][j].isNull()) {
                 ((Minion) arr[row][j]).
                         setAttackDamage(((Minion) arr[row][j]).getAttackDamage() + 1);

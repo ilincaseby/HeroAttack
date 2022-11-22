@@ -51,13 +51,13 @@ public class TakeAction {
             String command = action.getCommand();
             if (roundDone == 2) {
                 roundDone %= 2;
-                if (round < CommandActionHelper.Nine) {
+                if (round < CommandActionHelper.NINE) {
                     playerOne.mana = playerOne.mana + round + 1;
                     playerTwo.mana += round + 1;
                 }
-                if (round >= CommandActionHelper.Nine) {
-                    playerOne.mana += CommandActionHelper.Ten;
-                    playerTwo.mana += CommandActionHelper.Ten;
+                if (round >= CommandActionHelper.NINE) {
+                    playerOne.mana += CommandActionHelper.TEN;
+                    playerTwo.mana += CommandActionHelper.TEN;
                 }
                 round++;
 
@@ -71,74 +71,74 @@ public class TakeAction {
                 case "placeCard" -> {
                     if (playerOne.turn) {
                         CommandActionHelper.placeCardCommand(playerOne, action.getHandIdx(),
-                                Table.firstPlayerFrontRow, Table.firstPlayerBackRow, output);
+                                Table.FIRSTPLAYERFRONTROW, Table.FIRSTPLAYERBACKROW, output);
                     }
                     if (playerTwo.turn) {
                         CommandActionHelper.placeCardCommand(playerTwo, action.getHandIdx(),
-                                Table.secondPlayerFrontRow, Table.secondPlayerBackRow, output);
+                                Table.SECONDPLAYERFRONTROW, Table.SECONDPLAYERBACKROW, output);
                     }
                 }
                 case "cardUsesAttack" -> {
                     if (playerOne.turn) {
                         //int errorCode = 0;
                         CommandActionHelper.usesAttackCommandHelper(action.getCardAttacker(),
-                                action.getCardAttacked(), Table.firstPlayerFrontRow,
-                                Table.firstPlayerBackRow, Table.secondPlayerFrontRow, output);
+                                action.getCardAttacked(), Table.FIRSTPLAYERFRONTROW,
+                                Table.FIRSTPLAYERBACKROW, Table.SECONDPLAYERFRONTROW, output);
                     }
                     if (playerTwo.turn) {
                         CommandActionHelper.usesAttackCommandHelper(action.getCardAttacker(),
-                                action.getCardAttacked(), Table.secondPlayerFrontRow,
-                                Table.secondPlayerBackRow, Table.firstPlayerFrontRow, output);
+                                action.getCardAttacked(), Table.SECONDPLAYERFRONTROW,
+                                Table.SECONDPLAYERBACKROW, Table.FIRSTPLAYERFRONTROW, output);
                     }
                 }
                 case "cardUsesAbility" -> {
                     if (playerOne.turn) {
                         CommandActionHelperModule1.cardUsesAbilityHelper(action.getCardAttacker(),
-                                action.getCardAttacked(), output, Table.firstPlayerFrontRow,
-                                Table.firstPlayerBackRow, Table.secondPlayerFrontRow,
-                                Table.secondPlayerBackRow);
+                                action.getCardAttacked(), output, Table.FIRSTPLAYERFRONTROW,
+                                Table.FIRSTPLAYERBACKROW, Table.SECONDPLAYERFRONTROW,
+                                Table.SECONDPLAYERBACKROW);
                     }
                     if (playerTwo.turn) {
                         CommandActionHelperModule1.cardUsesAbilityHelper(action.getCardAttacker(),
-                                action.getCardAttacked(), output, Table.secondPlayerFrontRow,
-                                Table.secondPlayerBackRow, Table.firstPlayerFrontRow,
-                                Table.firstPlayerBackRow);
+                                action.getCardAttacked(), output, Table.SECONDPLAYERFRONTROW,
+                                Table.SECONDPLAYERBACKROW, Table.FIRSTPLAYERFRONTROW,
+                                Table.FIRSTPLAYERBACKROW);
                     }
                 }
                 case "useAttackHero" -> {
                     if (playerOne.turn) {
                         CommandActionHelperModule1.useAttackHero(playerTwo,
-                                Table.secondPlayerFrontRow, 1, oneWins, action.getCardAttacker(),
+                                Table.SECONDPLAYERFRONTROW, 1, oneWins, action.getCardAttacker(),
                                 output);
                     }
                     if (playerTwo.turn) {
                         CommandActionHelperModule1.useAttackHero(playerOne,
-                                Table.firstPlayerFrontRow, 2, twoWins, action.getCardAttacker(),
+                                Table.FIRSTPLAYERFRONTROW, 2, twoWins, action.getCardAttacker(),
                                 output);
                     }
                 }
                 case "useHeroAbility" -> {
                     if (playerOne.turn) {
                         CommandActionHelperModule2.abilityHeroUse(action.getAffectedRow(),
-                                playerOne, Table.firstPlayerFrontRow, Table.firstPlayerBackRow,
-                                Table.secondPlayerFrontRow, Table.secondPlayerBackRow, output);
+                                playerOne, Table.FIRSTPLAYERFRONTROW, Table.FIRSTPLAYERBACKROW,
+                                Table.SECONDPLAYERFRONTROW, Table.SECONDPLAYERBACKROW, output);
                     }
                     if (playerTwo.turn) {
                         CommandActionHelperModule2.abilityHeroUse(action.getAffectedRow(),
-                                playerTwo, Table.secondPlayerFrontRow, Table.secondPlayerBackRow,
-                                Table.firstPlayerFrontRow, Table.firstPlayerBackRow, output);
+                                playerTwo, Table.SECONDPLAYERFRONTROW, Table.SECONDPLAYERBACKROW,
+                                Table.FIRSTPLAYERFRONTROW, Table.FIRSTPLAYERBACKROW, output);
                     }
                 }
                 case "useEnvironmentCard" -> {
                     if (playerOne.turn) {
                         CommandActionHelperModule2.useEnvironmentCard(playerOne,
                                 action.getHandIdx(), action.getAffectedRow(),
-                                Table.secondPlayerFrontRow, Table.secondPlayerBackRow, output);
+                                Table.SECONDPLAYERFRONTROW, Table.SECONDPLAYERBACKROW, output);
                     }
                     if (playerTwo.turn) {
                         CommandActionHelperModule2.useEnvironmentCard(playerTwo,
                                 action.getHandIdx(), action.getAffectedRow(),
-                                Table.firstPlayerFrontRow, Table.firstPlayerBackRow, output);
+                                Table.FIRSTPLAYERFRONTROW, Table.FIRSTPLAYERBACKROW, output);
                     }
                 }
                 case "getCardsInHand" -> StatisticInfoHelper.

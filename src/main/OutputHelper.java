@@ -18,13 +18,13 @@ public final class OutputHelper {
             return null;
         }
         String err = "";
-        if (whichError == CommandActionHelper.One) {
+        if (whichError == CommandActionHelper.ONE) {
             err = "Cannot place environment card on table.";
         }
-        if (whichError == CommandActionHelper.Two) {
+        if (whichError == CommandActionHelper.TWO) {
             err = "Not enough mana to place card on table.";
         }
-        if (whichError == CommandActionHelper.Three) {
+        if (whichError == CommandActionHelper.THREE) {
             err = "Cannot place card on table since row is full.";
         }
 
@@ -53,16 +53,16 @@ public final class OutputHelper {
         node.set("cardAttacker", coordattacker);
         node.set("cardAttacked", coordattacked);
         String error = "";
-        if (whichError == CommandActionHelper.One) {
+        if (whichError == CommandActionHelper.ONE) {
             error = "Attacked card does not belong to the enemy.";
         }
-        if (whichError == CommandActionHelper.Two) {
+        if (whichError == CommandActionHelper.TWO) {
             error = "Attacker card has already attacked this turn.";
         }
-        if (whichError == CommandActionHelper.Three) {
+        if (whichError == CommandActionHelper.THREE) {
             error = "Attacker card is frozen.";
         }
-        if (whichError == CommandActionHelper.Four) {
+        if (whichError == CommandActionHelper.FOUR) {
             error = "Attacked card is not of type 'Tank'.";
         }
         node.put("error", error);
@@ -87,19 +87,19 @@ public final class OutputHelper {
         coordEd.put("y", attacked.getY());
         toAdd.set("cardAttacked", coordEd);
         String err = "";
-        if (whichError == CommandActionHelper.One) {
+        if (whichError == CommandActionHelper.ONE) {
             err = "Attacker card is frozen.";
         }
-        if (whichError == CommandActionHelper.Two) {
+        if (whichError == CommandActionHelper.TWO) {
             err = "Attacker card has already attacked this turn.";
         }
-        if (whichError == CommandActionHelper.Three) {
+        if (whichError == CommandActionHelper.THREE) {
             err = "Attacked card does not belong to the current player.";
         }
-        if (whichError == CommandActionHelper.Four) {
+        if (whichError == CommandActionHelper.FOUR) {
             err = "Attacked card does not belong to the enemy.";
         }
-        if (whichError == CommandActionHelper.Five) {
+        if (whichError == CommandActionHelper.FIVE) {
             err = "Attacked card is not of type 'Tank'.";
         }
         toAdd.put("error", err);
@@ -112,13 +112,13 @@ public final class OutputHelper {
      * **/
     public static ObjectNode useAttackHero(final int whichError, final Coordinates attacker) {
         String err = "";
-        if (whichError == CommandActionHelper.One) {
+        if (whichError == CommandActionHelper.ONE) {
             err = "Attacker card is frozen.";
         }
-        if (whichError == CommandActionHelper.Two) {
+        if (whichError == CommandActionHelper.TWO) {
             err = "Attacker card has already attacked this turn.";
         }
-        if (whichError == CommandActionHelper.Three) {
+        if (whichError == CommandActionHelper.THREE) {
             err = "Attacked card is not of type 'Tank'.";
         }
         ObjectMapper mapper = new ObjectMapper();
@@ -153,16 +153,16 @@ public final class OutputHelper {
      * **/
     public static ObjectNode errorHero(final int whichCase, final int affectedRow) {
         String err = "";
-        if (whichCase == CommandActionHelper.One) {
+        if (whichCase == CommandActionHelper.ONE) {
             err = "Not enough mana to use hero's ability.";
         }
-        if (whichCase == CommandActionHelper.Two) {
+        if (whichCase == CommandActionHelper.TWO) {
             err = "Hero has already attacked this turn.";
         }
-        if (whichCase == CommandActionHelper.Three) {
+        if (whichCase == CommandActionHelper.THREE) {
             err = "Selected row does not belong to the enemy.";
         }
-        if (whichCase == CommandActionHelper.Four) {
+        if (whichCase == CommandActionHelper.FOUR) {
             err = "Selected row does not belong to the current player.";
         }
         ObjectMapper mapper = new ObjectMapper();
@@ -180,16 +180,16 @@ public final class OutputHelper {
     public static ObjectNode errorEnvironment(final int whichCase,
                                               final int handIdx, final int affectedRow) {
         String err = "";
-        if (whichCase == CommandActionHelper.One) {
+        if (whichCase == CommandActionHelper.ONE) {
             err = "Chosen card is not of type environment.";
         }
-        if (whichCase == CommandActionHelper.Two) {
+        if (whichCase == CommandActionHelper.TWO) {
             err = "Not enough mana to use environment card.";
         }
-        if (whichCase == CommandActionHelper.Three) {
+        if (whichCase == CommandActionHelper.THREE) {
             err = "Chosen row does not belong to the enemy.";
         }
-        if (whichCase == CommandActionHelper.Four) {
+        if (whichCase == CommandActionHelper.FOUR) {
             err = "Cannot steal enemy card since the player's row is full.";
         }
         ObjectMapper mapper = new ObjectMapper();
@@ -290,9 +290,9 @@ public final class OutputHelper {
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getCardsOnTable");
         ArrayNode arrayNode = mapper.createArrayNode();
-        for (int i = 0; i < CommandActionHelper.Four; ++i) {
+        for (int i = 0; i < CommandActionHelper.FOUR; ++i) {
             ArrayNode arrayNode1 = mapper.createArrayNode();
-            for (int j = 0; j < Table.sizeCols; ++j) {
+            for (int j = 0; j < Table.SIZECOLS; ++j) {
                 if (!table.arr[i][j].isNull()) {
                     ObjectNode nodeCard = mapper.createObjectNode();
                     Minion minCard = ((Minion) table.arr[i][j]);
@@ -412,8 +412,8 @@ public final class OutputHelper {
         ObjectNode node = mapper.createObjectNode();
         node.put("command", "getFrozenCardsOnTable");
         ArrayNode arrayNode = mapper.createArrayNode();
-        for (int i = 0; i < CommandActionHelper.Four; ++i) {
-            for (int j = 0; j < Table.sizeCols; ++j) {
+        for (int i = 0; i < CommandActionHelper.FOUR; ++i) {
+            for (int j = 0; j < Table.SIZECOLS; ++j) {
                 if (!table.arr[i][j].isNull()) {
                     Minion minCard = ((Minion) table.arr[i][j]);
                     if (minCard.isFrozen()) {

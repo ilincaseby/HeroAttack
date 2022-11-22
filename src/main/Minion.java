@@ -105,6 +105,9 @@ public class Minion extends Cards {
         return isValidTurn;
     }
 
+    /**
+     * Setter
+     * **/
     public void setValidTurn(final boolean validTurn) {
         isValidTurn = validTurn;
     }
@@ -158,7 +161,7 @@ interface Actions {
 }
 
 class Miraj extends Minion implements Actions {
-    public Miraj(final int mana, final int health, final int attackDamage,
+    Miraj(final int mana, final int health, final int attackDamage,
                  final String description, final String name, final List<String> colors) {
         super(mana, health, attackDamage, description, name, colors);
     }
@@ -171,7 +174,7 @@ class Miraj extends Minion implements Actions {
 }
 
 class TheRipper extends Minion implements Actions {
-    public TheRipper(final int mana, final int health, final int attackDamage,
+    TheRipper(final int mana, final int health, final int attackDamage,
                      final String description, final String name, final List<String> colors) {
         super(mana, health, attackDamage, description, name, colors);
     }
@@ -185,7 +188,7 @@ class TheRipper extends Minion implements Actions {
 }
 
 class TheCursedOne extends Minion implements Actions {
-    public TheCursedOne(final int mana, final int health, final int attackDamage,
+    TheCursedOne(final int mana, final int health, final int attackDamage,
                         final String description, final String name, final List<String> colors) {
         super(mana, health, attackDamage, description, name, colors);
     }
@@ -200,7 +203,7 @@ class TheCursedOne extends Minion implements Actions {
 }
 
 class Disciple extends Minion implements Actions {
-    public Disciple(final int mana, final int health, final int attackDamage,
+    Disciple(final int mana, final int health, final int attackDamage,
                     final String description, final String name, final List<String> colors) {
         super(mana, health, attackDamage, description, name, colors);
     }
