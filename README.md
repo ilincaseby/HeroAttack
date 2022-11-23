@@ -7,7 +7,6 @@ It is very similar to DuelMaster. Both players has a hero from the beginning. Th
 A table is available where players can place the magic cards on their rows when is their turn to action. Hero can be attacked by just cards on the table. To protect the king, players can place Tank cards so the enemy must take down Tanks first. Also, for a more entertaining gamification, in the hand of the player there will be environment cards which have some impact on a specific row.
 
 ## Tank Cards
-
 * Goliath
 * Warden
 
@@ -63,7 +62,6 @@ _**These Cards do not have a special ability or tank attribute, they simply atta
 
 
 ## Block of code as final
-
 ```
 System.out.println("Hope this README makes everything clear about the project and if there is something unclear contact me at the following gmail address:");
 ```
