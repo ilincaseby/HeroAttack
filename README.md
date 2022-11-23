@@ -62,7 +62,7 @@ _**These Cards do not have a special ability or tank attribute, they simply atta
 1. A good program takes around 20% implementation, 30% coding style and making comments so that other people can look over and understand what has been done there, 20% research and 30% debugging.
 
 
-## Blocks of code
+## Block of code as final
 
 ```
 System.out.println("Hope this README makes everything clear about the project and if there is something unclear contact me at the following gmail address:");
