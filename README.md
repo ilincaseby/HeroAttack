@@ -1,8 +1,8 @@
-# GwentStone Gameplay README
+# HeroAttack Gameplay README
 Ilinca Sebastian-Ionut 321CA 2022
 
 ## Short Description
-GwentStone is a game based on magic players that appears on cards.
+HeroAttack is a game based on magic players that appears on cards.
 It is very similar to DuelMaster. Both players has a hero from the beginning. The purpose is to kill enemy's hero. That's the point where the cards have a meaning.
 A table is available where players can place the magic cards on their rows when is their turn to action. Hero can be attacked by just cards on the table. To protect the king, players can place Tank cards so the enemy must take down Tanks first. Also, for a more entertaining gamification, in the hand of the player there will be environment cards which have some impact on a specific row.
 
